@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" fill="none">
+  <rect width="600" height="400" fill="#0E0E10"/>
+  <rect x="100" y="150" width="400" height="30" rx="2" fill="#0F3D5E" opacity="0.3"/>
+  <rect x="100" y="200" width="400" height="30" rx="2" fill="#0F3D5E" opacity="0.25"/>
+  <rect x="100" y="250" width="400" height="30" rx="2" fill="#0F3D5E" opacity="0.2"/>
+  <circle cx="150" cy="120" r="20" fill="#2196F3" opacity="0.2"/>
+  <circle cx="450" cy="120" r="20" fill="#2196F3" opacity="0.2"/>
+  <path d="M150 120 L450 120" stroke="#2196F3" stroke-width="1" stroke-dasharray="4 4" opacity="0.3"/>
+  <text x="300" y="370" font-family="Inter, sans-serif" font-size="14" fill="rgba(255,255,255,0.3)" text-anchor="middle">Logistics Fleet</text>
+</svg>

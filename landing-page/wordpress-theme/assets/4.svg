@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" fill="none">
+  <rect width="600" height="400" fill="#0E0E10"/>
+  <rect x="50" y="100" width="200" height="150" rx="4" fill="#0F3D5E" opacity="0.4"/>
+  <rect x="80" y="260" width="140" height="20" rx="2" fill="#2196F3" opacity="0.3"/>
+  <circle cx="400" cy="200" r="80" stroke="#2196F3" stroke-width="2" opacity="0.3" fill="none"/>
+  <path d="M350 200 L400 150 L450 200 L400 250 Z" fill="#2196F3" opacity="0.15"/>
+  <text x="300" y="370" font-family="Inter, sans-serif" font-size="14" fill="rgba(255,255,255,0.3)" text-anchor="middle">Heavy Machinery</text>
+</svg>

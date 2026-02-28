@@ -1,0 +1,17 @@
+/*
+Theme Name: GlobalTech Industries
+Theme URI: https://globaltech.com
+Author: GlobalTech Industries
+Description: Premium industrial procurement and logistics theme with WordPress integration, REST API blog, multilingual support (EN/RU/UZ), and contact form.
+Version: 1.0.0
+Requires at least: 6.0
+Requires PHP: 8.0
+License: Private
+Text Domain: globaltech
+Tags: business, industrial, one-page, dark, multilingual
+*/
+
+/*
+ * This file intentionally only contains the WordPress theme header comment.
+ * All actual styles are in css/main.css, loaded via functions.php.
+ */
