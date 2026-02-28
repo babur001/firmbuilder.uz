@@ -25,17 +25,21 @@
             <div class="footer-column">
                 <h4 data-i18n="footer.company">Company</h4>
                 <ul>
-                    <li><a href="#" data-i18n="footer.about_us">About Us</a></li>
-                    <li><a href="#" data-i18n="footer.our_team">Our Team</a></li>
-                    <li><a href="#" data-i18n="footer.careers">Careers</a></li>
                     <li><a href="<?php echo esc_url(get_permalink(get_option('page_for_posts'))); ?>" data-i18n="footer.news">News</a></li>
+                    <li><a href="#contact" data-i18n="nav.contact">Contact Us</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h4 data-i18n="footer.contact">Contact</h4>
                 <ul>
                     <li><a href="#contact" data-i18n="footer.china_office">China Office</a></li>
+                    <?php if (get_theme_mod('gt_china_phone')) : ?>
+                    <li><a href="tel:<?php echo esc_attr(get_theme_mod('gt_china_phone')); ?>"><?php echo esc_html(get_theme_mod('gt_china_phone')); ?></a></li>
+                    <?php endif; ?>
                     <li><a href="#contact" data-i18n="footer.uzbekistan_office">Uzbekistan Office</a></li>
+                    <?php if (get_theme_mod('gt_uz_phone')) : ?>
+                    <li><a href="tel:<?php echo esc_attr(get_theme_mod('gt_uz_phone')); ?>"><?php echo esc_html(get_theme_mod('gt_uz_phone')); ?></a></li>
+                    <?php endif; ?>
                     <li><a href="mailto:<?php echo antispambot(get_theme_mod('gt_email','info@globaltech.com')); ?>">
                         <?php echo antispambot(get_theme_mod('gt_email','info@globaltech.com')); ?>
                     </a></li>

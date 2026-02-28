@@ -50,12 +50,13 @@ function globaltech_assets() {
 
     // Pass WordPress REST API URL and settings to JS
     wp_localize_script('globaltech-main', 'wpConfig', [
-        'apiUrl'          => esc_url_raw(rest_url('wp/v2')),
-        'siteUrl'         => esc_url(home_url()),
-        'nonce'           => wp_create_nonce('wp_rest'),
-        'postsPerPage'    => 3,
-        'contactEndpoint' => esc_url_raw(rest_url('globaltech/v1/contact')),
-        'lang'            => defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : get_locale(),
+        'apiUrl'           => esc_url_raw(rest_url('wp/v2')),
+        'siteUrl'          => esc_url(home_url()),
+        'nonce'            => wp_create_nonce('wp_rest'),
+        'postsPerPage'     => 3,
+        'contactEndpoint'  => esc_url_raw(rest_url('globaltech/v1/contact')),
+        'lang'             => defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : get_locale(),
+        'recaptchaSiteKey' => get_theme_mod('gt_recaptcha_site_key', ''),
     ]);
 }
 add_action('wp_enqueue_scripts', 'globaltech_assets');
@@ -78,6 +79,24 @@ function globaltech_register_rest_routes() {
 add_action('rest_api_init', 'globaltech_register_rest_routes');
 
 function globaltech_handle_contact(WP_REST_Request $request) {
+    // reCAPTCHA verification
+    $secret_key = get_theme_mod('gt_recaptcha_secret_key', '');
+    if ($secret_key) {
+        $token = $request->get_param('recaptcha_token');
+        if (!$token) {
+            return new WP_Error('recaptcha_missing', 'reCAPTCHA verification required', ['status' => 403]);
+        }
+        $verify = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
+            'body' => ['secret' => $secret_key, 'response' => $token],
+        ]);
+        if (!is_wp_error($verify)) {
+            $result = json_decode(wp_remote_retrieve_body($verify), true);
+            if (!$result['success'] || ($result['score'] ?? 0) < 0.5) {
+                return new WP_Error('recaptcha_failed', 'Spam detected', ['status' => 403]);
+            }
+        }
+    }
+
     $name    = $request->get_param('name');
     $email   = $request->get_param('email');
     $company = $request->get_param('company') ?: '—';
@@ -99,27 +118,22 @@ function globaltech_handle_contact(WP_REST_Request $request) {
         "Reply-To: $name <$email>",
     ];
 
-    $sent = wp_mail($admin_email, $subject, $body, $headers);
+    // Always save as a custom post for CRM tracking
+    wp_insert_post([
+        'post_type'   => 'gt_inquiry',
+        'post_title'  => "$name — $company",
+        'post_status' => 'publish',
+        'meta_input'  => [
+            '_gt_email'   => $email,
+            '_gt_service' => $service,
+            '_gt_message' => $message,
+        ],
+    ]);
 
-    // Optional: save as a custom post for CRM-like tracking
-    if ($sent) {
-        wp_insert_post([
-            'post_type'   => 'gt_inquiry',
-            'post_title'  => "$name — $company",
-            'post_status' => 'private',
-            'meta_input'  => [
-                '_gt_email'   => $email,
-                '_gt_service' => $service,
-                '_gt_message' => $message,
-            ],
-        ]);
-    }
+    // Attempt email notification (best-effort)
+    wp_mail($admin_email, $subject, $body, $headers);
 
-    if ($sent) {
-        return rest_ensure_response(['success' => true, 'message' => 'Message sent']);
-    }
-
-    return new WP_Error('mail_failed', 'Failed to send email', ['status' => 500]);
+    return rest_ensure_response(['success' => true, 'message' => 'Message sent']);
 }
 
 // ─── Custom Post Type: Inquiries (CRM) ───────────────────────────────────────
@@ -177,12 +191,12 @@ add_action('rest_api_init', function() {
 
 // ─── Theme Customizer ─────────────────────────────────────────────────────────
 function globaltech_customize_register($wp_customize) {
+    // ── Contact Information ──
     $wp_customize->add_section('globaltech_contact', [
         'title'    => __('Contact Information', 'globaltech'),
         'priority' => 30,
     ]);
 
-    // Email
     $wp_customize->add_setting('gt_email', ['default' => 'info@globaltech.com', 'sanitize_callback' => 'sanitize_email']);
     $wp_customize->add_control('gt_email', [
         'label'   => __('Email Address', 'globaltech'),
@@ -190,15 +204,6 @@ function globaltech_customize_register($wp_customize) {
         'type'    => 'email',
     ]);
 
-    // Phone
-    $wp_customize->add_setting('gt_phone', ['default' => '', 'sanitize_callback' => 'sanitize_text_field']);
-    $wp_customize->add_control('gt_phone', [
-        'label'   => __('Phone Number', 'globaltech'),
-        'section' => 'globaltech_contact',
-        'type'    => 'text',
-    ]);
-
-    // China Address
     $wp_customize->add_setting('gt_china_address', ['default' => 'Guangzhou, Guangdong, China', 'sanitize_callback' => 'sanitize_text_field']);
     $wp_customize->add_control('gt_china_address', [
         'label'   => __('China Office Address', 'globaltech'),
@@ -206,7 +211,13 @@ function globaltech_customize_register($wp_customize) {
         'type'    => 'text',
     ]);
 
-    // Uzbekistan Address
+    $wp_customize->add_setting('gt_china_phone', ['default' => '', 'sanitize_callback' => 'sanitize_text_field']);
+    $wp_customize->add_control('gt_china_phone', [
+        'label'   => __('China Office Phone', 'globaltech'),
+        'section' => 'globaltech_contact',
+        'type'    => 'tel',
+    ]);
+
     $wp_customize->add_setting('gt_uz_address', ['default' => 'Tashkent, Uzbekistan', 'sanitize_callback' => 'sanitize_text_field']);
     $wp_customize->add_control('gt_uz_address', [
         'label'   => __('Uzbekistan Office Address', 'globaltech'),
@@ -214,7 +225,14 @@ function globaltech_customize_register($wp_customize) {
         'type'    => 'text',
     ]);
 
-    // Social Links
+    $wp_customize->add_setting('gt_uz_phone', ['default' => '', 'sanitize_callback' => 'sanitize_text_field']);
+    $wp_customize->add_control('gt_uz_phone', [
+        'label'   => __('Uzbekistan Office Phone', 'globaltech'),
+        'section' => 'globaltech_contact',
+        'type'    => 'tel',
+    ]);
+
+    // ── Social Links ──
     $wp_customize->add_section('globaltech_social', [
         'title'    => __('Social Links', 'globaltech'),
         'priority' => 35,
@@ -240,8 +258,133 @@ function globaltech_customize_register($wp_customize) {
         'section' => 'globaltech_social',
         'type'    => 'url',
     ]);
+
+    // ── SEO ──
+    $wp_customize->add_section('globaltech_seo', [
+        'title'    => __('SEO Settings', 'globaltech'),
+        'priority' => 40,
+    ]);
+
+    $wp_customize->add_setting('gt_meta_description', ['default' => '', 'sanitize_callback' => 'sanitize_text_field']);
+    $wp_customize->add_control('gt_meta_description', [
+        'label'       => __('Meta Description (homepage)', 'globaltech'),
+        'description' => __('Recommended 150-160 characters.', 'globaltech'),
+        'section'     => 'globaltech_seo',
+        'type'        => 'textarea',
+    ]);
+
+    $wp_customize->add_setting('gt_meta_keywords', ['default' => '', 'sanitize_callback' => 'sanitize_text_field']);
+    $wp_customize->add_control('gt_meta_keywords', [
+        'label'   => __('Meta Keywords (comma-separated)', 'globaltech'),
+        'section' => 'globaltech_seo',
+        'type'    => 'text',
+    ]);
+
+    // ── Google Analytics ──
+    $wp_customize->add_section('globaltech_analytics', [
+        'title'    => __('Google Analytics', 'globaltech'),
+        'priority' => 45,
+    ]);
+
+    $wp_customize->add_setting('gt_ga_id', ['default' => '', 'sanitize_callback' => 'sanitize_text_field']);
+    $wp_customize->add_control('gt_ga_id', [
+        'label'       => __('Google Analytics Measurement ID', 'globaltech'),
+        'description' => __('e.g. G-XXXXXXXXXX', 'globaltech'),
+        'section'     => 'globaltech_analytics',
+        'type'        => 'text',
+    ]);
+
+    // ── reCAPTCHA ──
+    $wp_customize->add_section('globaltech_recaptcha', [
+        'title'    => __('reCAPTCHA (Spam Protection)', 'globaltech'),
+        'priority' => 50,
+    ]);
+
+    $wp_customize->add_setting('gt_recaptcha_site_key', ['default' => '', 'sanitize_callback' => 'sanitize_text_field']);
+    $wp_customize->add_control('gt_recaptcha_site_key', [
+        'label'   => __('reCAPTCHA v3 Site Key', 'globaltech'),
+        'section' => 'globaltech_recaptcha',
+        'type'    => 'text',
+    ]);
+
+    $wp_customize->add_setting('gt_recaptcha_secret_key', ['default' => '', 'sanitize_callback' => 'sanitize_text_field']);
+    $wp_customize->add_control('gt_recaptcha_secret_key', [
+        'label'   => __('reCAPTCHA v3 Secret Key', 'globaltech'),
+        'section' => 'globaltech_recaptcha',
+        'type'    => 'text',
+    ]);
 }
 add_action('customize_register', 'globaltech_customize_register');
+
+// ─── SEO Meta Tags ────────────────────────────────────────────────────────────
+function globaltech_seo_meta() {
+    // Meta description
+    if (is_front_page()) {
+        $desc = get_theme_mod('gt_meta_description', '');
+        if (!$desc) {
+            $desc = get_bloginfo('description');
+        }
+    } elseif (is_singular()) {
+        $desc = wp_trim_words(get_the_excerpt(), 30, '');
+    } else {
+        $desc = get_bloginfo('description');
+    }
+    if ($desc) {
+        echo '<meta name="description" content="' . esc_attr($desc) . '">' . "\n";
+    }
+
+    // Meta keywords (homepage only)
+    $keywords = get_theme_mod('gt_meta_keywords', '');
+    if ($keywords && is_front_page()) {
+        echo '<meta name="keywords" content="' . esc_attr($keywords) . '">' . "\n";
+    }
+
+    // Open Graph
+    echo '<meta property="og:title" content="' . esc_attr(wp_get_document_title()) . '">' . "\n";
+    if ($desc) {
+        echo '<meta property="og:description" content="' . esc_attr($desc) . '">' . "\n";
+    }
+    echo '<meta property="og:type" content="' . (is_singular('post') ? 'article' : 'website') . '">' . "\n";
+    echo '<meta property="og:url" content="' . esc_url(is_front_page() ? home_url('/') : get_permalink()) . '">' . "\n";
+    if (is_singular() && has_post_thumbnail()) {
+        $img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'globaltech-blog-full');
+        if ($img) {
+            echo '<meta property="og:image" content="' . esc_url($img[0]) . '">' . "\n";
+        }
+    }
+}
+add_action('wp_head', 'globaltech_seo_meta', 1);
+
+// ─── Google Analytics ─────────────────────────────────────────────────────────
+function globaltech_google_analytics() {
+    $ga_id = get_theme_mod('gt_ga_id', '');
+    if (!$ga_id) return;
+    ?>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr($ga_id); ?>"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '<?php echo esc_js($ga_id); ?>');
+    </script>
+    <?php
+}
+add_action('wp_head', 'globaltech_google_analytics', 2);
+
+// ─── reCAPTCHA v3 ─────────────────────────────────────────────────────────────
+function globaltech_recaptcha_enqueue() {
+    $site_key = get_theme_mod('gt_recaptcha_site_key', '');
+    if (!$site_key) return;
+    wp_enqueue_script('google-recaptcha', 'https://www.google.com/recaptcha/api.js?render=' . esc_attr($site_key), [], null, true);
+}
+add_action('wp_enqueue_scripts', 'globaltech_recaptcha_enqueue');
+
+// ─── Robots.txt customization ─────────────────────────────────────────────────
+function globaltech_robots_txt($output, $public) {
+    // WordPress 5.5+ already adds the sitemap line — no need to duplicate
+    return $output;
+}
+add_filter('robots_txt', 'globaltech_robots_txt', 10, 2);
 
 // ─── Custom meta fields for inquiries in admin ───────────────────────────────
 function globaltech_inquiry_meta_box() {
@@ -255,3 +398,32 @@ function globaltech_inquiry_meta_box() {
     }, 'gt_inquiry', 'normal', 'high');
 }
 add_action('add_meta_boxes', 'globaltech_inquiry_meta_box');
+
+// ─── Inquiry admin list columns ───────────────────────────────────────────────
+function globaltech_inquiry_columns($columns) {
+    return [
+        'cb'         => $columns['cb'],
+        'title'      => __('Name / Company', 'globaltech'),
+        'gt_email'   => __('Email', 'globaltech'),
+        'gt_service' => __('Service', 'globaltech'),
+        'gt_message' => __('Message', 'globaltech'),
+        'date'       => $columns['date'],
+    ];
+}
+add_filter('manage_gt_inquiry_posts_columns', 'globaltech_inquiry_columns');
+
+function globaltech_inquiry_column_data($column, $post_id) {
+    switch ($column) {
+        case 'gt_email':
+            $email = get_post_meta($post_id, '_gt_email', true);
+            echo '<a href="mailto:' . esc_attr($email) . '">' . esc_html($email) . '</a>';
+            break;
+        case 'gt_service':
+            echo esc_html(get_post_meta($post_id, '_gt_service', true));
+            break;
+        case 'gt_message':
+            echo esc_html(wp_trim_words(get_post_meta($post_id, '_gt_message', true), 12));
+            break;
+    }
+}
+add_action('manage_gt_inquiry_posts_custom_column', 'globaltech_inquiry_column_data', 10, 2);

@@ -12,7 +12,7 @@ get_header();
 <!-- ===== HERO ===== -->
 <section class="hero">
     <div class="hero-background">
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/3.svg" alt="Industrial background">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/hero-bg.jpg" alt="Industrial background">
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-geometric">
@@ -50,11 +50,10 @@ get_header();
         </div>
         <div class="services-grid">
             <?php
-            // Services can be managed as a Custom Post Type or hardcoded
             $services = [
-                ['icon' => 'procurement', 'title_key' => 'services.procurement.title', 'desc_key' => 'services.procurement.desc'],
-                ['icon' => 'logistics',   'title_key' => 'services.logistics.title',   'desc_key' => 'services.logistics.desc'],
-                ['icon' => 'consulting',  'title_key' => 'services.consulting.title',  'desc_key' => 'services.consulting.desc'],
+                ['icon' => 'procurement', 'title_key' => 'services.procurement.title', 'desc_key' => 'services.procurement.desc', 'image' => 'assets/images/service-procurement.jpg'],
+                ['icon' => 'logistics',   'title_key' => 'services.logistics.title',   'desc_key' => 'services.logistics.desc',   'image' => 'assets/images/service-logistics.jpg'],
+                ['icon' => 'consulting',  'title_key' => 'services.consulting.title',  'desc_key' => 'services.consulting.desc',  'image' => 'assets/images/service-consulting.jpg'],
             ];
             $icons = [
                 'procurement' => '<svg viewBox="0 0 64 64"><rect x="8" y="20" width="48" height="36" rx="2"/><path d="M8 28h48"/><circle cx="32" cy="42" r="8"/><path d="M20 8h24v12H20z"/></svg>',
@@ -62,19 +61,43 @@ get_header();
                 'consulting'  => '<svg viewBox="0 0 64 64"><circle cx="32" cy="20" r="12"/><path d="M16 56c0-8.8 7.2-16 16-16s16 7.2 16 16"/><path d="M44 20l12 8"/><circle cx="56" cy="28" r="4"/></svg>',
             ];
             foreach ($services as $s) : ?>
-            <div class="service-card reveal">
+            <div class="service-card reveal" data-service="<?php echo esc_attr($s['icon']); ?>"
+                 data-service-image="<?php echo esc_url(get_template_directory_uri() . '/' . $s['image']); ?>">
                 <div class="service-icon"><?php echo $icons[$s['icon']]; ?></div>
                 <h3 data-i18n="<?php echo $s['title_key']; ?>">Service</h3>
                 <p data-i18n="<?php echo $s['desc_key']; ?>">Description</p>
-                <a href="#contact" class="service-link">
+                <span class="service-link">
                     <span data-i18n="services.learn_more">Learn More</span>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
+                </span>
             </div>
             <?php endforeach; ?>
         </div>
     </div>
 </section>
+
+<!-- ===== SERVICE MODAL ===== -->
+<div class="service-modal" id="serviceModal">
+    <div class="service-modal-overlay"></div>
+    <div class="service-modal-content">
+        <button class="service-modal-close" id="serviceModalClose" aria-label="Close">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="service-modal-image">
+            <img id="serviceModalImage" src="" alt="">
+        </div>
+        <div class="service-modal-body">
+            <div class="service-modal-icon" id="serviceModalIcon"></div>
+            <h2 id="serviceModalTitle"></h2>
+            <p class="service-modal-desc" id="serviceModalDesc"></p>
+            <ul class="service-modal-features" id="serviceModalFeatures"></ul>
+            <a href="#contact" class="btn-primary service-modal-cta" id="serviceModalCta">
+                <span data-i18n="hero.btn_contact">Get in Touch</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </a>
+        </div>
+    </div>
+</div>
 
 <!-- ===== GLOBAL REACH ===== -->
 <section class="global-reach" id="global">
@@ -134,14 +157,16 @@ get_header();
         <div class="gallery-grid">
             <?php
             $items = [
-                ['src' => 'assets/4.svg',  'alt' => 'Heavy Machinery',       'title' => 'gallery.item1.title', 'desc' => 'gallery.item1.desc'],
-                ['src' => 'assets/7.svg',  'alt' => 'Construction Equipment', 'title' => 'gallery.item2.title', 'desc' => 'gallery.item2.desc'],
-                ['src' => 'assets/9.svg',  'alt' => 'Mining Equipment',       'title' => 'gallery.item3.title', 'desc' => 'gallery.item3.desc'],
-                ['src' => 'assets/11.svg', 'alt' => 'Logistics Fleet',        'title' => 'gallery.item4.title', 'desc' => 'gallery.item4.desc'],
-                ['src' => 'assets/12.svg', 'alt' => 'Manufacturing',           'title' => 'gallery.item5.title', 'desc' => 'gallery.item5.desc'],
+                ['src' => 'assets/images/gallery-heavy-machinery.jpg', 'alt' => 'Heavy Machinery',       'key' => 'item1', 'title' => 'gallery.item1.title', 'desc' => 'gallery.item1.desc'],
+                ['src' => 'assets/images/gallery-construction.jpg',  'alt' => 'Construction Equipment', 'key' => 'item2', 'title' => 'gallery.item2.title', 'desc' => 'gallery.item2.desc'],
+                ['src' => 'assets/images/gallery-mining.jpg',        'alt' => 'Mining Equipment',       'key' => 'item3', 'title' => 'gallery.item3.title', 'desc' => 'gallery.item3.desc'],
+                ['src' => 'assets/images/gallery-logistics.jpg',     'alt' => 'Logistics Fleet',        'key' => 'item4', 'title' => 'gallery.item4.title', 'desc' => 'gallery.item4.desc'],
+                ['src' => 'assets/images/gallery-manufacturing.jpg', 'alt' => 'Manufacturing',           'key' => 'item5', 'title' => 'gallery.item5.title', 'desc' => 'gallery.item5.desc'],
             ];
             foreach ($items as $i => $item) : ?>
-            <div class="gallery-item reveal<?php echo $i === 0 ? ' large' : ''; ?>">
+            <div class="gallery-item reveal<?php echo $i === 0 ? ' large' : ''; ?>"
+                 data-gallery="<?php echo esc_attr($item['key']); ?>"
+                 data-gallery-image="<?php echo esc_url(get_template_directory_uri() . '/' . $item['src']); ?>">
                 <img src="<?php echo get_template_directory_uri() . '/' . $item['src']; ?>" alt="<?php echo esc_attr($item['alt']); ?>">
                 <div class="gallery-item-overlay">
                     <h4 data-i18n="<?php echo $item['title']; ?>"><?php echo $item['alt']; ?></h4>
@@ -152,6 +177,28 @@ get_header();
         </div>
     </div>
 </section>
+
+<!-- ===== GALLERY MODAL ===== -->
+<div class="gallery-modal" id="galleryModal">
+    <div class="gallery-modal-overlay"></div>
+    <div class="gallery-modal-content">
+        <button class="gallery-modal-close" id="galleryModalClose" aria-label="Close">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="gallery-modal-image">
+            <img id="galleryModalImage" src="" alt="">
+        </div>
+        <div class="gallery-modal-body">
+            <h2 id="galleryModalTitle"></h2>
+            <p class="gallery-modal-desc" id="galleryModalDesc"></p>
+            <ul class="gallery-modal-specs" id="galleryModalSpecs"></ul>
+            <a href="#contact" class="btn-primary gallery-modal-cta" id="galleryModalCta">
+                <span data-i18n="cta.btn_start">Start a Project</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+    </div>
+</div>
 
 <!-- ===== RECENT POSTS (WordPress) ===== -->
 <section class="blog-section" id="blog">
@@ -230,6 +277,9 @@ get_header();
                         <div class="contact-detail-text">
                             <strong>China Office</strong>
                             <span><?php echo esc_html(get_theme_mod('gt_china_address', 'Guangzhou, Guangdong, China')); ?></span>
+                            <?php if (get_theme_mod('gt_china_phone')) : ?>
+                            <br><a href="tel:<?php echo esc_attr(get_theme_mod('gt_china_phone')); ?>"><?php echo esc_html(get_theme_mod('gt_china_phone')); ?></a>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="contact-detail">
@@ -237,6 +287,9 @@ get_header();
                         <div class="contact-detail-text">
                             <strong>Uzbekistan Office</strong>
                             <span><?php echo esc_html(get_theme_mod('gt_uz_address', 'Tashkent, Uzbekistan')); ?></span>
+                            <?php if (get_theme_mod('gt_uz_phone')) : ?>
+                            <br><a href="tel:<?php echo esc_attr(get_theme_mod('gt_uz_phone')); ?>"><?php echo esc_html(get_theme_mod('gt_uz_phone')); ?></a>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="contact-detail">

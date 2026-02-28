@@ -34,10 +34,31 @@ const translations = {
         'services.description': 'Comprehensive industrial solutions tailored for global enterprises seeking excellence in procurement, logistics, and strategic consulting.',
         'services.procurement.title': 'Equipment Procurement',
         'services.procurement.desc': 'Strategic sourcing of industrial machinery and equipment from verified global manufacturers with quality assurance.',
+        'services.procurement.modal_desc': 'We provide end-to-end equipment procurement services — from identifying the right suppliers and conducting factory audits to negotiating pricing and managing quality control. Our team sources industrial machinery, construction equipment, and manufacturing systems from verified manufacturers across China, Europe, and North America.',
+        'services.procurement.feature_1': 'Supplier search & verification',
+        'services.procurement.feature_2': 'Factory audits & quality control',
+        'services.procurement.feature_3': 'Price negotiation & contracts',
+        'services.procurement.feature_4': 'Equipment catalog & specs',
+        'services.procurement.feature_5': 'Spare parts sourcing',
+        'services.procurement.feature_6': 'Warranty management',
         'services.logistics.title': 'Logistics Services',
         'services.logistics.desc': 'End-to-end supply chain solutions including international shipping, customs clearance, and last-mile delivery.',
+        'services.logistics.modal_desc': 'Our logistics division manages the entire supply chain from origin to destination. We handle international shipping via sea, air, rail, and road freight, customs clearance, cargo consolidation, and door-to-door delivery across routes connecting China, Central Asia, Russia, and the Americas.',
+        'services.logistics.feature_1': 'Sea / Air / Rail / Road freight',
+        'services.logistics.feature_2': 'Customs clearance & documentation',
+        'services.logistics.feature_3': 'Cargo consolidation',
+        'services.logistics.feature_4': 'Door-to-door delivery',
+        'services.logistics.feature_5': 'Real-time shipment tracking',
+        'services.logistics.feature_6': 'Warehousing & distribution',
         'services.consulting.title': 'Strategic Consulting',
         'services.consulting.desc': 'Expert guidance on market entry, supplier audits, and operational optimization for industrial enterprises.',
+        'services.consulting.modal_desc': 'Our consulting team provides expert guidance on expanding into new markets, particularly across China and Central Asia. We assist with company registration, regulatory compliance, visa services, and operational optimization to help industrial enterprises establish and grow their international presence.',
+        'services.consulting.feature_1': 'Company registration (China / HK)',
+        'services.consulting.feature_2': 'Market entry strategy',
+        'services.consulting.feature_3': 'Visa services (business / work)',
+        'services.consulting.feature_4': 'Document preparation',
+        'services.consulting.feature_5': 'Supplier audits',
+        'services.consulting.feature_6': 'Operational optimization',
         'services.learn_more': 'Learn More',
         'global.label': 'Worldwide Network',
         'global.title': 'Global Reach,<br>Local Expertise',
@@ -54,14 +75,39 @@ const translations = {
         'gallery.title': 'Featured Equipment',
         'gallery.item1.title': 'Heavy Machinery',
         'gallery.item1.desc': 'Industrial excavators and loaders',
+        'gallery.item1.modal_desc': 'We source and supply a wide range of heavy machinery for construction, mining, and industrial applications. From excavators and wheel loaders to bulldozers and graders — all from certified manufacturers with full warranty support.',
+        'gallery.item1.spec_1': 'Excavators (1.5–90 ton)',
+        'gallery.item1.spec_2': 'Wheel loaders & backhoes',
+        'gallery.item1.spec_3': 'Bulldozers & graders',
+        'gallery.item1.spec_4': 'Factory-certified warranty',
         'gallery.item2.title': 'Construction Equipment',
         'gallery.item2.desc': 'Cranes and lifting solutions',
+        'gallery.item2.modal_desc': 'Our construction equipment portfolio includes tower cranes, mobile cranes, concrete pumps, and scaffolding systems. We provide equipment for projects of any scale — from urban buildings to large infrastructure.',
+        'gallery.item2.spec_1': 'Tower & mobile cranes',
+        'gallery.item2.spec_2': 'Concrete pumps & mixers',
+        'gallery.item2.spec_3': 'Scaffolding systems',
+        'gallery.item2.spec_4': 'On-site installation support',
         'gallery.item3.title': 'Mining Equipment',
         'gallery.item3.desc': 'Extraction and processing',
+        'gallery.item3.modal_desc': 'Specialized mining equipment for extraction, crushing, screening, and processing operations. We supply complete solutions for open-pit and underground mining with options for customization and spare parts.',
+        'gallery.item3.spec_1': 'Crushers & screeners',
+        'gallery.item3.spec_2': 'Drilling rigs',
+        'gallery.item3.spec_3': 'Conveyor systems',
+        'gallery.item3.spec_4': 'Spare parts supply chain',
         'gallery.item4.title': 'Logistics Fleet',
         'gallery.item4.desc': 'Transportation and delivery',
+        'gallery.item4.modal_desc': 'Our logistics fleet covers all modes of transportation for oversized and standard cargo. We manage delivery of heavy equipment from factory to your site, including customs clearance and route planning.',
+        'gallery.item4.spec_1': 'Flatbed & lowboy trailers',
+        'gallery.item4.spec_2': 'Container shipping',
+        'gallery.item4.spec_3': 'Oversized cargo handling',
+        'gallery.item4.spec_4': 'Door-to-site delivery',
         'gallery.item5.title': 'Manufacturing',
         'gallery.item5.desc': 'Production line equipment',
+        'gallery.item5.modal_desc': 'We supply manufacturing and production line equipment including CNC machines, industrial presses, packaging systems, and automation components. Solutions are tailored to your production requirements.',
+        'gallery.item5.spec_1': 'CNC machines & lathes',
+        'gallery.item5.spec_2': 'Industrial presses',
+        'gallery.item5.spec_3': 'Packaging & sorting lines',
+        'gallery.item5.spec_4': 'Automation components',
         'cta.label': 'Ready to Start?',
         'cta.title': "Let's Build Something<br>Extraordinary Together",
         'cta.description': 'Partner with industry leaders in procurement, logistics, and strategic consulting to achieve your global success.',
@@ -127,10 +173,31 @@ const translations = {
         'services.description': 'Комплексные промышленные решения для глобальных предприятий, стремящихся к совершенству в закупках, логистике и стратегическом консалтинге.',
         'services.procurement.title': 'Закупка оборудования',
         'services.procurement.desc': 'Стратегическое приобретение промышленных машин и оборудования у проверенных мировых производителей с гарантией качества.',
+        'services.procurement.modal_desc': 'Мы обеспечиваем полный цикл закупок оборудования — от поиска поставщиков и проведения заводских аудитов до согласования цен и контроля качества. Наша команда закупает промышленное оборудование, строительную технику и производственные системы у проверенных производителей Китая, Европы и Северной Америки.',
+        'services.procurement.feature_1': 'Поиск и проверка поставщиков',
+        'services.procurement.feature_2': 'Аудит заводов и контроль качества',
+        'services.procurement.feature_3': 'Переговоры по ценам и контрактам',
+        'services.procurement.feature_4': 'Каталог оборудования',
+        'services.procurement.feature_5': 'Поставка запчастей',
+        'services.procurement.feature_6': 'Управление гарантией',
         'services.logistics.title': 'Логистические услуги',
         'services.logistics.desc': 'Комплексные решения в цепочке поставок, включая международные перевозки, таможенное оформление и доставку до конечного потребителя.',
+        'services.logistics.modal_desc': 'Наш логистический отдел управляет всей цепочкой поставок от точки отправления до пункта назначения. Мы организуем международные перевозки морским, воздушным, железнодорожным и автомобильным транспортом, таможенное оформление, консолидацию грузов и доставку «до двери» по маршрутам Китай — Центральная Азия — Россия — Америка.',
+        'services.logistics.feature_1': 'Морские / Авиа / ЖД / Авто перевозки',
+        'services.logistics.feature_2': 'Таможенное оформление',
+        'services.logistics.feature_3': 'Консолидация грузов',
+        'services.logistics.feature_4': 'Доставка до двери',
+        'services.logistics.feature_5': 'Отслеживание грузов',
+        'services.logistics.feature_6': 'Складирование и распределение',
         'services.consulting.title': 'Стратегический консалтинг',
         'services.consulting.desc': 'Экспертное руководство по выходу на рынок, аудиту поставщиков и оптимизации операций для промышленных предприятий.',
+        'services.consulting.modal_desc': 'Наша команда консультантов предоставляет экспертную поддержку по выходу на новые рынки, особенно в Китае и Центральной Азии. Мы помогаем с регистрацией компаний, соблюдением нормативных требований, визовыми вопросами и оптимизацией операций.',
+        'services.consulting.feature_1': 'Регистрация компании (Китай / Гонконг)',
+        'services.consulting.feature_2': 'Стратегия выхода на рынок',
+        'services.consulting.feature_3': 'Визовые услуги (бизнес / рабочая)',
+        'services.consulting.feature_4': 'Подготовка документов',
+        'services.consulting.feature_5': 'Аудит поставщиков',
+        'services.consulting.feature_6': 'Оптимизация операций',
         'services.learn_more': 'Подробнее',
         'global.label': 'Мировая сеть',
         'global.title': 'Глобальный охват,<br>локальная экспертиза',
@@ -147,14 +214,39 @@ const translations = {
         'gallery.title': 'Избранное оборудование',
         'gallery.item1.title': 'Тяжёлая техника',
         'gallery.item1.desc': 'Промышленные экскаваторы и погрузчики',
+        'gallery.item1.modal_desc': 'Мы поставляем широкий спектр тяжёлой техники для строительства, горнодобычи и промышленного применения. От экскаваторов и фронтальных погрузчиков до бульдозеров и грейдеров — всё от сертифицированных производителей с полной гарантийной поддержкой.',
+        'gallery.item1.spec_1': 'Экскаваторы (1,5–90 тонн)',
+        'gallery.item1.spec_2': 'Фронтальные погрузчики',
+        'gallery.item1.spec_3': 'Бульдозеры и грейдеры',
+        'gallery.item1.spec_4': 'Заводская гарантия',
         'gallery.item2.title': 'Строительная техника',
         'gallery.item2.desc': 'Краны и подъёмные решения',
+        'gallery.item2.modal_desc': 'Портфолио строительной техники включает башенные краны, автокраны, бетононасосы и системы строительных лесов. Мы обеспечиваем оборудование для проектов любого масштаба — от жилых зданий до крупной инфраструктуры.',
+        'gallery.item2.spec_1': 'Башенные и автомобильные краны',
+        'gallery.item2.spec_2': 'Бетононасосы и миксеры',
+        'gallery.item2.spec_3': 'Системы строительных лесов',
+        'gallery.item2.spec_4': 'Монтаж на объекте',
         'gallery.item3.title': 'Горнодобывающее оборудование',
         'gallery.item3.desc': 'Добыча и переработка',
+        'gallery.item3.modal_desc': 'Специализированное горнодобывающее оборудование для добычи, дробления, грохочения и переработки. Полные решения для открытой и подземной добычи с возможностью кастомизации и поставки запчастей.',
+        'gallery.item3.spec_1': 'Дробилки и грохоты',
+        'gallery.item3.spec_2': 'Буровые установки',
+        'gallery.item3.spec_3': 'Конвейерные системы',
+        'gallery.item3.spec_4': 'Цепочка поставки запчастей',
         'gallery.item4.title': 'Логистический парк',
         'gallery.item4.desc': 'Транспортировка и доставка',
+        'gallery.item4.modal_desc': 'Наш логистический парк охватывает все виды транспорта для негабаритных и стандартных грузов. Мы организуем доставку тяжёлого оборудования от завода до вашего объекта, включая таможенное оформление и планирование маршрута.',
+        'gallery.item4.spec_1': 'Платформы и тралы',
+        'gallery.item4.spec_2': 'Контейнерные перевозки',
+        'gallery.item4.spec_3': 'Негабаритные грузы',
+        'gallery.item4.spec_4': 'Доставка до объекта',
         'gallery.item5.title': 'Производство',
         'gallery.item5.desc': 'Оборудование производственных линий',
+        'gallery.item5.modal_desc': 'Поставляем оборудование для производства и линий: станки с ЧПУ, промышленные прессы, упаковочные системы и компоненты автоматизации. Решения адаптируются под ваши производственные потребности.',
+        'gallery.item5.spec_1': 'Станки с ЧПУ и токарные станки',
+        'gallery.item5.spec_2': 'Промышленные прессы',
+        'gallery.item5.spec_3': 'Линии упаковки и сортировки',
+        'gallery.item5.spec_4': 'Компоненты автоматизации',
         'cta.label': 'Готовы начать?',
         'cta.title': 'Давайте вместе<br>создадим нечто выдающееся',
         'cta.description': 'Сотрудничайте с лидерами отрасли в области закупок, логистики и стратегического консалтинга для достижения глобального успеха.',
@@ -220,10 +312,31 @@ const translations = {
         'services.description': "Xarid, logistika va strategik konsaltingda mukammallikka intilayotgan global korxonalar uchun kompleks sanoat yechimlari.",
         'services.procurement.title': 'Uskunalar xaridi',
         'services.procurement.desc': "Sifat kafolati bilan tasdiqlangan global ishlab chiqaruvchilardan sanoat mashinalari va uskunalarini strategik xarid qilish.",
+        'services.procurement.modal_desc': "Biz uskunalar xaridining to'liq tsiklini ta'minlaymiz — yetkazib beruvchilarni qidirishdan tortib, zavod auditlari o'tkazish, narxlarni kelishish va sifat nazoratigacha. Jamoamiz Xitoy, Yevropa va Shimoliy Amerikaning tasdiqlangan ishlab chiqaruvchilaridan sanoat uskunalari, qurilish texnikasi va ishlab chiqarish tizimlarini xarid qiladi.",
+        'services.procurement.feature_1': "Yetkazib beruvchilarni qidirish va tekshirish",
+        'services.procurement.feature_2': "Zavod auditi va sifat nazorati",
+        'services.procurement.feature_3': "Narx muzokaralari va shartnomalar",
+        'services.procurement.feature_4': "Uskunalar katalogi",
+        'services.procurement.feature_5': "Ehtiyot qismlar yetkazib berish",
+        'services.procurement.feature_6': "Kafolat boshqaruvi",
         'services.logistics.title': 'Logistika xizmatlari',
         'services.logistics.desc': "To'liq ta'minot zanjiri yechimlari: xalqaro yetkazib berish, bojxona rasmiylashtiruvi va oxirgi bosqich yetkazib berish.",
+        'services.logistics.modal_desc': "Logistika bo'limimiz butun ta'minot zanjirini boshidan oxirigacha boshqaradi. Biz dengiz, havo, temir yo'l va avtomobil transporti orqali xalqaro yuk tashishni, bojxona rasmiylashtirishni, yuklarni konsolidatsiya qilishni va Xitoy — Markaziy Osiyo — Rossiya — Amerika yo'nalishlarida eshikkacha yetkazib berishni tashkil etamiz.",
+        'services.logistics.feature_1': "Dengiz / Havo / Temir yo'l / Avto tashish",
+        'services.logistics.feature_2': "Bojxona rasmiylashtiruvi",
+        'services.logistics.feature_3': "Yuklarni konsolidatsiya qilish",
+        'services.logistics.feature_4': "Eshikkacha yetkazib berish",
+        'services.logistics.feature_5': "Yuklarni kuzatish",
+        'services.logistics.feature_6': "Ombor xizmatlari",
         'services.consulting.title': 'Strategik konsalting',
         'services.consulting.desc': "Sanoat korxonalari uchun bozorga kirish, yetkazib beruvchilarni audit qilish va operatsiyalarni optimallashtirish.",
+        'services.consulting.modal_desc': "Konsaltinglar jamoamiz yangi bozorlarga, ayniqsa Xitoy va Markaziy Osiyoga kirishda ekspert yordamini taqdim etadi. Biz kompaniyalarni ro'yxatdan o'tkazish, me'yoriy talablarga rioya qilish, viza xizmatlari va operatsiyalarni optimallashtirish bo'yicha yordam beramiz.",
+        'services.consulting.feature_1': "Kompaniyani ro'yxatdan o'tkazish (Xitoy / Gonkong)",
+        'services.consulting.feature_2': "Bozorga kirish strategiyasi",
+        'services.consulting.feature_3': "Viza xizmatlari (biznes / ish)",
+        'services.consulting.feature_4': "Hujjatlarni tayyorlash",
+        'services.consulting.feature_5': "Yetkazib beruvchilar auditi",
+        'services.consulting.feature_6': "Operatsiyalarni optimallashtirish",
         'services.learn_more': "Batafsil",
         'global.label': "Jahon tarmog'i",
         'global.title': "Global qamrov,<br>mahalliy ekspertiza",
@@ -240,14 +353,39 @@ const translations = {
         'gallery.title': 'Tanlangan uskunalar',
         'gallery.item1.title': "Og'ir texnika",
         'gallery.item1.desc': 'Sanoat ekskavatorlari va yuklagichlar',
+        'gallery.item1.modal_desc': "Qurilish, konchilik va sanoat uchun keng turdagi og'ir texnikani yetkazib beramiz. Ekskavatorlar va yuklagichlardan tortib buldozerlar va greyderlardan — barchasi sertifikatlangan ishlab chiqaruvchilardan to'liq kafolat bilan.",
+        'gallery.item1.spec_1': "Ekskavatorlar (1,5–90 tonna)",
+        'gallery.item1.spec_2': "Frontal yuklagichlar",
+        'gallery.item1.spec_3': "Buldozerlar va greyderlar",
+        'gallery.item1.spec_4': "Zavod kafolati",
         'gallery.item2.title': 'Qurilish uskunalari',
         'gallery.item2.desc': "Kranlar va ko'tarish yechimlari",
+        'gallery.item2.modal_desc': "Qurilish uskunalari portfelimizga minora kranlari, avtokranlar, beton nasoslari va iskala tizimlari kiradi. Har qanday miqyosdagi loyihalar uchun uskunalar yetkazib beramiz.",
+        'gallery.item2.spec_1': "Minora va mobil kranlar",
+        'gallery.item2.spec_2': "Beton nasoslari va mikserlar",
+        'gallery.item2.spec_3': "Iskala tizimlari",
+        'gallery.item2.spec_4': "Ob'ektda o'rnatish",
         'gallery.item3.title': "Konchilik uskunalari",
         'gallery.item3.desc': "Qazib olish va qayta ishlash",
+        'gallery.item3.modal_desc': "Qazib olish, maydalash, elash va qayta ishlash uchun maxsus konchilik uskunalari. Ochiq va er osti konchiligi uchun to'liq yechimlar.",
+        'gallery.item3.spec_1': "Maydalagichlar va elaklar",
+        'gallery.item3.spec_2': "Burg'ulash moslamalari",
+        'gallery.item3.spec_3': "Konveyer tizimlari",
+        'gallery.item3.spec_4': "Ehtiyot qismlar yetkazish",
         'gallery.item4.title': 'Logistika parki',
         'gallery.item4.desc': 'Transport va yetkazib berish',
+        'gallery.item4.modal_desc': "Logistika parkimiz katta o'lchamli va standart yuklar uchun barcha transport turlarini qamrab oladi. Og'ir uskunalarni zavoddan ob'ektingizgacha yetkazib beramiz.",
+        'gallery.item4.spec_1': "Platformalar va trallar",
+        'gallery.item4.spec_2': "Konteyner tashish",
+        'gallery.item4.spec_3': "Katta o'lchamli yuklar",
+        'gallery.item4.spec_4': "Ob'ektgacha yetkazish",
         'gallery.item5.title': 'Ishlab chiqarish',
         'gallery.item5.desc': 'Ishlab chiqarish liniyasi uskunalari',
+        'gallery.item5.modal_desc': "Ishlab chiqarish va liniya uskunalarini yetkazib beramiz: CNC stanoklari, sanoat presslari, qadoqlash tizimlari va avtomatlashtirish komponentlari.",
+        'gallery.item5.spec_1': "CNC stanoklari",
+        'gallery.item5.spec_2': "Sanoat presslari",
+        'gallery.item5.spec_3': "Qadoqlash va saralash liniyalari",
+        'gallery.item5.spec_4': "Avtomatlashtirish komponentlari",
         'cta.label': 'Boshlashga tayyormisiz?',
         'cta.title': "Keling, birgalikda<br>ajoyib narsa yarataylik",
         'cta.description': "Global muvaffaqiyatga erishish uchun soha yetakchilari bilan hamkor bo'ling.",
@@ -332,6 +470,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initMapHover();
     initContactForm();
     initBlog();
+    initServiceModals();
+    initGalleryModals();
 });
 
 // ===== NAVBAR =====
@@ -428,6 +568,130 @@ function initMapHover() {
     });
 }
 
+// ===== SERVICE MODALS =====
+function initServiceModals() {
+    const modal = document.getElementById('serviceModal');
+    if (!modal) return;
+
+    const overlay = modal.querySelector('.service-modal-overlay');
+    const closeBtn = document.getElementById('serviceModalClose');
+    const modalImage = document.getElementById('serviceModalImage');
+    const modalIcon = document.getElementById('serviceModalIcon');
+    const modalTitle = document.getElementById('serviceModalTitle');
+    const modalDesc = document.getElementById('serviceModalDesc');
+    const modalFeatures = document.getElementById('serviceModalFeatures');
+    const modalCta = document.getElementById('serviceModalCta');
+
+    function openModal(card) {
+        const serviceKey = card.dataset.service;
+        const imageUrl = card.dataset.serviceImage;
+        const t = translations[currentLang] || translations.en;
+
+        modalImage.src = imageUrl;
+        modalImage.alt = t[`services.${serviceKey}.title`] || '';
+        modalIcon.innerHTML = card.querySelector('.service-icon').innerHTML;
+        modalTitle.textContent = t[`services.${serviceKey}.title`] || '';
+        modalDesc.textContent = t[`services.${serviceKey}.modal_desc`] || t[`services.${serviceKey}.desc`] || '';
+
+        // Build features list
+        modalFeatures.innerHTML = '';
+        for (let i = 1; i <= 6; i++) {
+            const feat = t[`services.${serviceKey}.feature_${i}`];
+            if (feat) {
+                const li = document.createElement('li');
+                li.textContent = feat;
+                modalFeatures.appendChild(li);
+            }
+        }
+
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.service-card[data-service]').forEach(card => {
+        card.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal(card);
+        });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+
+    // Close modal and scroll to contact when CTA is clicked
+    modalCta.addEventListener('click', () => {
+        closeModal();
+    });
+}
+
+// ===== GALLERY MODALS =====
+function initGalleryModals() {
+    const modal = document.getElementById('galleryModal');
+    if (!modal) return;
+
+    const overlay = modal.querySelector('.gallery-modal-overlay');
+    const closeBtn = document.getElementById('galleryModalClose');
+    const modalImage = document.getElementById('galleryModalImage');
+    const modalTitle = document.getElementById('galleryModalTitle');
+    const modalDesc = document.getElementById('galleryModalDesc');
+    const modalSpecs = document.getElementById('galleryModalSpecs');
+    const modalCta = document.getElementById('galleryModalCta');
+
+    function openModal(item) {
+        const key = item.dataset.gallery;
+        const imageUrl = item.dataset.galleryImage;
+        const t = translations[currentLang] || translations.en;
+
+        modalImage.src = imageUrl;
+        modalImage.alt = t[`gallery.${key}.title`] || '';
+        modalTitle.textContent = t[`gallery.${key}.title`] || '';
+        modalDesc.textContent = t[`gallery.${key}.modal_desc`] || t[`gallery.${key}.desc`] || '';
+
+        modalSpecs.innerHTML = '';
+        for (let i = 1; i <= 4; i++) {
+            const spec = t[`gallery.${key}.spec_${i}`];
+            if (spec) {
+                const li = document.createElement('li');
+                li.textContent = spec;
+                modalSpecs.appendChild(li);
+            }
+        }
+
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.gallery-item[data-gallery]').forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal(item);
+        });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+
+    modalCta.addEventListener('click', () => {
+        closeModal();
+    });
+}
+
 // ===== CONTACT FORM =====
 function initContactForm() {
     const form = document.getElementById('contactForm');
@@ -446,7 +710,12 @@ function initContactForm() {
         const data = Object.fromEntries(formData.entries());
 
         try {
-            // If WordPress is configured, POST to Contact Form 7 or custom endpoint
+            // Add reCAPTCHA token if configured
+            if (typeof wpConfig !== 'undefined' && wpConfig.recaptchaSiteKey && typeof grecaptcha !== 'undefined') {
+                data.recaptcha_token = await grecaptcha.execute(wpConfig.recaptchaSiteKey, {action: 'contact'});
+            }
+
+            // If WordPress is configured, POST to custom endpoint
             if (WP_CONFIG.enabled && WP_CONFIG.contactEndpoint) {
                 const response = await fetch(WP_CONFIG.contactEndpoint, {
                     method: 'POST',
