@@ -61,7 +61,8 @@ get_header();
                 'consulting'  => '<svg viewBox="0 0 64 64"><circle cx="32" cy="20" r="12"/><path d="M16 56c0-8.8 7.2-16 16-16s16 7.2 16 16"/><path d="M44 20l12 8"/><circle cx="56" cy="28" r="4"/></svg>',
             ];
             foreach ($services as $s) : ?>
-            <div class="service-card reveal" data-service="<?php echo esc_attr($s['icon']); ?>"
+            <a href="<?php echo esc_url(home_url('/services/#' . $s['icon'])); ?>" class="service-card reveal"
+                 data-service="<?php echo esc_attr($s['icon']); ?>"
                  data-service-image="<?php echo esc_url(get_template_directory_uri() . '/' . $s['image']); ?>">
                 <div class="service-icon"><?php echo $icons[$s['icon']]; ?></div>
                 <h3 data-i18n="<?php echo $s['title_key']; ?>">Service</h3>
@@ -70,7 +71,7 @@ get_header();
                     <span data-i18n="services.learn_more">Learn More</span>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </span>
-            </div>
+            </a>
             <?php endforeach; ?>
         </div>
     </div>

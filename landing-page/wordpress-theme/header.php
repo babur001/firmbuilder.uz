@@ -24,10 +24,10 @@
     </a>
 
     <ul class="nav-links">
-        <li><a href="#services" data-i18n="nav.services"><?php esc_html_e('Services', 'globaltech'); ?></a></li>
-        <li><a href="#global"   data-i18n="nav.global"><?php esc_html_e('Global Reach', 'globaltech'); ?></a></li>
-        <li><a href="#equipment" data-i18n="nav.equipment"><?php esc_html_e('Equipment', 'globaltech'); ?></a></li>
-        <li><a href="#blog"     data-i18n="nav.about"><?php esc_html_e('About', 'globaltech'); ?></a></li>
+        <li><a href="<?php echo esc_url(home_url('/services/')); ?>" data-i18n="nav.services"><?php esc_html_e('Services', 'globaltech'); ?></a></li>
+        <li><a href="<?php echo esc_url(home_url('/#global')); ?>" data-i18n="nav.global"><?php esc_html_e('Global Reach', 'globaltech'); ?></a></li>
+        <li><a href="<?php echo esc_url(home_url('/#equipment')); ?>" data-i18n="nav.equipment"><?php esc_html_e('Equipment', 'globaltech'); ?></a></li>
+        <li><a href="<?php echo esc_url(home_url('/#blog')); ?>" data-i18n="nav.about"><?php esc_html_e('About', 'globaltech'); ?></a></li>
     </ul>
 
     <div class="nav-right">
@@ -59,11 +59,11 @@
 
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
-    <a href="#services" data-i18n="nav.services"><?php esc_html_e('Services', 'globaltech'); ?></a>
-    <a href="#global"   data-i18n="nav.global"><?php esc_html_e('Global Reach', 'globaltech'); ?></a>
-    <a href="#equipment" data-i18n="nav.equipment"><?php esc_html_e('Equipment', 'globaltech'); ?></a>
-    <a href="#blog"     data-i18n="nav.about"><?php esc_html_e('About', 'globaltech'); ?></a>
-    <a href="#contact"  data-i18n="nav.contact"><?php esc_html_e('Contact Us', 'globaltech'); ?></a>
+    <a href="<?php echo esc_url(home_url('/services/')); ?>" data-i18n="nav.services"><?php esc_html_e('Services', 'globaltech'); ?></a>
+    <a href="<?php echo esc_url(home_url('/#global')); ?>" data-i18n="nav.global"><?php esc_html_e('Global Reach', 'globaltech'); ?></a>
+    <a href="<?php echo esc_url(home_url('/#equipment')); ?>" data-i18n="nav.equipment"><?php esc_html_e('Equipment', 'globaltech'); ?></a>
+    <a href="<?php echo esc_url(home_url('/#blog')); ?>" data-i18n="nav.about"><?php esc_html_e('About', 'globaltech'); ?></a>
+    <a href="<?php echo esc_url(home_url('/#contact')); ?>" data-i18n="nav.contact"><?php esc_html_e('Contact Us', 'globaltech'); ?></a>
     <div class="mobile-lang">
         <button class="lang-btn" data-lang="en">EN</button>
         <button class="lang-btn active" data-lang="ru">RU</button>

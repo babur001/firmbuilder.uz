@@ -28,7 +28,7 @@ add_action('after_setup_theme', 'globaltech_setup');
 
 // ─── Enqueue Scripts & Styles ─────────────────────────────────────────────────
 function globaltech_assets() {
-    $version = wp_get_theme()->get('Version');
+    $version = filemtime(get_template_directory() . '/js/main.js');
 
     wp_enqueue_style(
         'globaltech-fonts',

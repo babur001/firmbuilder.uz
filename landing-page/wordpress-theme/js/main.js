@@ -12,6 +12,7 @@ const WP_CONFIG = {
 // Auto-detect: if running inside WordPress theme, use current origin
 if (typeof wpConfig !== 'undefined' && wpConfig.apiUrl) {
     WP_CONFIG.apiUrl = wpConfig.apiUrl;
+    WP_CONFIG.contactEndpoint = wpConfig.contactEndpoint || '';
     WP_CONFIG.enabled = true;
 }
 
@@ -520,11 +521,18 @@ function initScrollReveal() {
 
 // ===== SMOOTH SCROLL =====
 function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    document.querySelectorAll('a[href*="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const href = this.getAttribute('href');
+            const url = new URL(href, window.location.origin);
+            // Only smooth-scroll if the link targets the current page
+            if (url.pathname !== window.location.pathname && url.pathname !== '/') return;
+            if (!url.hash) return;
+            const target = document.querySelector(url.hash);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         });
     });
 }
@@ -614,6 +622,8 @@ function initServiceModals() {
     }
 
     document.querySelectorAll('.service-card[data-service]').forEach(card => {
+        // Skip cards that are links (front page links to /services/ page)
+        if (card.tagName === 'A' && card.href) return;
         card.addEventListener('click', (e) => {
             e.preventDefault();
             openModal(card);
@@ -708,6 +718,9 @@ function initContactForm() {
 
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
+        // Remove WordPress nonce fields (not needed for REST API)
+        delete data.gt_nonce;
+        delete data._wp_http_referer;
 
         try {
             // Add reCAPTCHA token if configured
@@ -731,7 +744,8 @@ function initContactForm() {
             statusEl.className = 'form-status success';
             statusEl.textContent = translations[lang]['contact.success'];
             form.reset();
-        } catch {
+        } catch (err) {
+            console.error('Contact form error:', err);
             statusEl.className = 'form-status error';
             statusEl.textContent = translations[lang]['contact.error'];
         } finally {
