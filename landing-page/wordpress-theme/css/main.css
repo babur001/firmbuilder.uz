@@ -657,8 +657,9 @@ a.service-card *, a.service-card:visited *, a.service-card:hover *, a.service-ca
 .region-item:hover { background: rgba(33,150,243,0.1); border-color: rgba(33,150,243,0.3); }
 .region-dot { width: 10px; height: 10px; background: var(--electric-blue); border-radius: 50%; box-shadow: 0 0 10px var(--electric-blue); }
 .region-item span { font-size: 0.9rem; font-weight: 500; }
-.map-container { position: relative; aspect-ratio: 16/10; }
-.world-map { width: 100%; height: 100%; opacity: 0.6; }
+.map-container { position: relative; aspect-ratio: 1010 / 666; }
+.world-map { width: 100%; height: 100%; display: block; opacity: 0.75; }
+.map-routes { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .map-point {
     position: absolute;
     width: 12px; height: 12px;
@@ -678,10 +679,10 @@ a.service-card *, a.service-card:visited *, a.service-card:hover *, a.service-ca
     border-radius: 50%;
     animation: mapRipple 2s infinite;
 }
-.map-point.china { top: 40%; left: 75%; }
-.map-point.uzbekistan { top: 35%; left: 58%; }
-.map-point.usa { top: 35%; left: 22%; }
-.map-point.brazil { top: 70%; left: 32%; }
+.map-point.china { top: 53%; left: 78%; }
+.map-point.uzbekistan { top: 51%; left: 66%; }
+.map-point.usa { top: 50%; left: 23%; }
+.map-point.brazil { top: 72%; left: 32%; }
 
 /* ===== TRUST ===== */
 .trust { padding: 6rem 0; background: var(--primary-blue); position: relative; }

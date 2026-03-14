@@ -116,14 +116,12 @@ get_header();
                 </div>
             </div>
             <div class="map-container reveal">
-                <svg class="world-map" viewBox="0 0 1000 500" fill="none">
-                    <path d="M150 120 Q200 100 280 110 Q320 130 300 180 Q280 220 230 240 Q180 230 160 200 Q140 160 150 120Z" fill="#1a3a52" stroke="#2196F3" stroke-width="0.5"/>
-                    <path d="M180 260 Q220 250 280 280 Q320 340 280 400 Q220 420 180 380 Q150 320 180 260Z" fill="#1a3a52" stroke="#2196F3" stroke-width="0.5"/>
-                    <path d="M420 80 Q520 60 620 80 Q680 120 660 180 Q620 220 540 200 Q460 180 440 140 Q420 100 420 80Z" fill="#1a3a52" stroke="#2196F3" stroke-width="0.5"/>
-                    <path d="M440 200 Q480 190 520 200 Q560 240 540 300 Q500 340 460 320 Q420 280 440 200Z" fill="#1a3a52" stroke="#2196F3" stroke-width="0.5"/>
-                    <path d="M620 100 Q720 80 820 100 Q880 160 860 240 Q800 300 720 280 Q640 240 620 180 Q600 120 620 100Z" fill="#1a3a52" stroke="#2196F3" stroke-width="0.5"/>
-                    <path d="M760 320 Q840 300 900 340 Q920 400 880 440 Q820 460 780 420 Q740 380 760 320Z" fill="#1a3a52" stroke="#2196F3" stroke-width="0.5"/>
-                    <path d="M230 150 Q400 100 750 160" stroke="#2196F3" stroke-width="1" stroke-dasharray="4 4" opacity="0.4"/>
+                <img class="world-map" src="<?php echo get_template_directory_uri(); ?>/images/world-map.svg" alt="World map" loading="lazy">
+                <!-- Trade route overlay (coordinates match 1010×666 viewBox) -->
+                <svg class="map-routes" viewBox="0 0 1010 666" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M786,354 Q720,300 666,336" stroke="#2196F3" stroke-width="1.2" stroke-dasharray="6 4" opacity="0.6"/>
+                    <path d="M666,336 Q580,270 505,340 Q360,270 231,330" stroke="#2196F3" stroke-width="1.2" stroke-dasharray="6 4" opacity="0.6"/>
+                    <path d="M231,330 Q275,420 321,479" stroke="#2196F3" stroke-width="1.2" stroke-dasharray="6 4" opacity="0.6"/>
                 </svg>
                 <div class="map-point china"></div>
                 <div class="map-point uzbekistan"></div>
