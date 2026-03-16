@@ -71,7 +71,7 @@ function globaltech_register_rest_routes() {
             'name'    => ['required' => true,  'sanitize_callback' => 'sanitize_text_field'],
             'email'   => ['required' => true,  'sanitize_callback' => 'sanitize_email',     'validate_callback' => 'is_email'],
             'company' => ['required' => false, 'sanitize_callback' => 'sanitize_text_field'],
-            'service' => ['required' => false, 'sanitize_callback' => 'sanitize_text_field'],
+            'phone'   => ['required' => false, 'sanitize_callback' => 'sanitize_text_field'],
             'message' => ['required' => true,  'sanitize_callback' => 'sanitize_textarea_field'],
         ],
     ]);
@@ -100,7 +100,7 @@ function globaltech_handle_contact(WP_REST_Request $request) {
     $name    = $request->get_param('name');
     $email   = $request->get_param('email');
     $company = $request->get_param('company') ?: '—';
-    $service = $request->get_param('service') ?: '—';
+    $phone   = $request->get_param('phone') ?: '—';
     $message = $request->get_param('message');
 
     $admin_email = get_option('admin_email');
@@ -110,7 +110,7 @@ function globaltech_handle_contact(WP_REST_Request $request) {
     $body .= "Name:    $name\n";
     $body .= "Email:   $email\n";
     $body .= "Company: $company\n";
-    $body .= "Service: $service\n\n";
+    $body .= "Phone:   $phone\n\n";
     $body .= "Message:\n$message\n";
 
     $headers = [
@@ -125,7 +125,7 @@ function globaltech_handle_contact(WP_REST_Request $request) {
         'post_status' => 'publish',
         'meta_input'  => [
             '_gt_email'   => $email,
-            '_gt_service' => $service,
+            '_gt_phone'   => $phone,
             '_gt_message' => $message,
         ],
     ]);
@@ -390,10 +390,10 @@ add_filter('robots_txt', 'globaltech_robots_txt', 10, 2);
 function globaltech_inquiry_meta_box() {
     add_meta_box('gt_inquiry_details', 'Inquiry Details', function($post) {
         $email   = get_post_meta($post->ID, '_gt_email',   true);
-        $service = get_post_meta($post->ID, '_gt_service', true);
+        $phone   = get_post_meta($post->ID, '_gt_phone',   true);
         $message = get_post_meta($post->ID, '_gt_message', true);
         echo "<p><strong>Email:</strong> " . esc_html($email) . "</p>";
-        echo "<p><strong>Service:</strong> " . esc_html($service) . "</p>";
+        echo "<p><strong>Phone:</strong> " . esc_html($phone) . "</p>";
         echo "<p><strong>Message:</strong><br>" . nl2br(esc_html($message)) . "</p>";
     }, 'gt_inquiry', 'normal', 'high');
 }
@@ -405,7 +405,7 @@ function globaltech_inquiry_columns($columns) {
         'cb'         => $columns['cb'],
         'title'      => __('Name / Company', 'globaltech'),
         'gt_email'   => __('Email', 'globaltech'),
-        'gt_service' => __('Service', 'globaltech'),
+        'gt_phone'   => __('Phone', 'globaltech'),
         'gt_message' => __('Message', 'globaltech'),
         'date'       => $columns['date'],
     ];
@@ -418,8 +418,8 @@ function globaltech_inquiry_column_data($column, $post_id) {
             $email = get_post_meta($post_id, '_gt_email', true);
             echo '<a href="mailto:' . esc_attr($email) . '">' . esc_html($email) . '</a>';
             break;
-        case 'gt_service':
-            echo esc_html(get_post_meta($post_id, '_gt_service', true));
+        case 'gt_phone':
+            echo esc_html(get_post_meta($post_id, '_gt_phone', true));
             break;
         case 'gt_message':
             echo esc_html(wp_trim_words(get_post_meta($post_id, '_gt_message', true), 12));

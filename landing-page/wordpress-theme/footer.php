@@ -16,17 +16,16 @@
             <div class="footer-column">
                 <h4 data-i18n="footer.services">Services</h4>
                 <ul>
-                    <li><a href="#services" data-i18n="footer.equipment_procurement">Equipment Procurement</a></li>
-                    <li><a href="#services" data-i18n="footer.logistics_services">Logistics Services</a></li>
-                    <li><a href="#services" data-i18n="footer.supplier_audit">Supplier Audit</a></li>
-                    <li><a href="#services" data-i18n="footer.consulting">Consulting</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/trading/')); ?>" data-i18n="nav.trading">Trading</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/logistics/')); ?>" data-i18n="nav.logistics">Logistics</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/consulting/')); ?>" data-i18n="nav.consulting">Consulting</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h4 data-i18n="footer.company">Company</h4>
                 <ul>
-                    <li><a href="<?php echo esc_url(get_permalink(get_option('page_for_posts'))); ?>" data-i18n="footer.news">News</a></li>
-                    <li><a href="#contact" data-i18n="nav.contact">Contact Us</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/#about')); ?>" data-i18n="about.label">About Us</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/contacts/')); ?>" data-i18n="nav.contacts">Contacts</a></li>
                 </ul>
             </div>
             <div class="footer-column">

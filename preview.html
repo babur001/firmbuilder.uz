@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GlobalTech — Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  :root {
+    --bg: #0E0E10;
+    --bg2: #141416;
+    --bg3: #080809;
+    --blue: #2196F3;
+    --white: #FFFFFF;
+    --muted: rgba(255,255,255,0.7);
+    --muted2: rgba(255,255,255,0.5);
+    --muted3: rgba(255,255,255,0.4);
+    --card-bg: rgba(255,255,255,0.02);
+    --card-border: rgba(255,255,255,0.07);
+    --border-thin: rgba(255,255,255,0.08);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0a0c;
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* PAGE SWITCHER */
+  .page-switcher {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(8,8,9,0.97);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 52px;
+  }
+  .switcher-logo {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .switcher-logo-icon {
+    width: 28px; height: 28px;
+    background: #0F3D5E;
+    border-radius: 4px;
+  }
+  .switcher-tabs {
+    display: flex;
+    gap: 4px;
+  }
+  .tab-btn {
+    padding: 6px 18px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.45);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.05); }
+  .tab-btn.active { background: var(--blue); color: #fff; font-weight: 600; }
+
+  /* PAGE */
+  .page { display: none; padding-top: 52px; }
+  .page.active { display: block; }
+
+  /* NAVIGATION */
+  nav {
+    width: 100%;
+    height: 80px;
+    background: rgba(14,14,16,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 72px;
+    position: sticky;
+    top: 52px;
+    z-index: 100;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; }
+  .nav-logo-icon { width: 40px; height: 40px; background: #0F3D5E; border-radius: 4px; }
+  .nav-logo-text { font-size: 18px; font-weight: 700; }
+  .nav-links { display: flex; gap: 40px; align-items: center; }
+  .nav-link { font-size: 14px; font-weight: 500; color: var(--muted); cursor: pointer; transition: color 0.2s; text-decoration: none; }
+  .nav-link:hover { color: var(--white); }
+  .nav-link.active { color: var(--blue); font-weight: 600; }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .lang-switcher { display: flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.05); border-radius: 8px; padding: 4px; }
+  .lang-btn { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.5); padding: 6px 10px; border-radius: 5px; cursor: pointer; }
+  .lang-btn.active { background: var(--blue); color: #fff; }
+  .nav-cta { font-size: 14px; font-weight: 500; color: var(--white); padding: 10px 22px; cursor: pointer; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; transition: all 0.2s; }
+  .nav-cta:hover { background: rgba(255,255,255,0.07); }
+
+  /* HERO */
+  .hero {
+    background: var(--bg);
+    padding: 120px 72px;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(33,150,243,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(33,150,243,0.1);
+    border-radius: 50px;
+    padding: 8px 16px;
+    width: fit-content;
+  }
+  .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); }
+  .hero-badge-text { font-size: 12px; font-weight: 500; color: var(--blue); }
+  .hero-title { font-size: 64px; font-weight: 800; line-height: 1.08; letter-spacing: -1px; white-space: pre-line; }
+  .hero-desc { font-size: 20px; font-weight: 300; color: var(--muted); line-height: 1.6; max-width: 680px; white-space: pre-line; }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--blue); color: #fff;
+    font-size: 14px; font-weight: 600;
+    padding: 14px 28px; border-radius: 8px; cursor: pointer;
+    border: none; font-family: 'Inter', sans-serif;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(33,150,243,0.3);
+  }
+  .btn-primary:hover { background: #1976D2; transform: translateY(-1px); box-shadow: 0 6px 28px rgba(33,150,243,0.4); }
+  .btn-primary svg { width: 18px; height: 18px; }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: #fff;
+    font-size: 14px; font-weight: 600;
+    padding: 14px 28px; border-radius: 8px; cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.25); font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.4); }
+
+  /* SECTION */
+  .section { padding: 100px 72px; background: var(--bg); }
+  .section.alt { background: var(--bg2); }
+  .section.dark3 { background: var(--bg3); }
+  .section-header { display: flex; flex-direction: column; gap: 16px; margin-bottom: 64px; }
+  .section-label { display: flex; align-items: center; gap: 16px; }
+  .section-label-line { width: 40px; height: 1px; background: var(--blue); }
+  .section-label-text { font-size: 12px; font-weight: 600; color: var(--blue); letter-spacing: 3px; }
+  .section-title { font-size: 48px; font-weight: 700; letter-spacing: -0.5px; }
+  .section-desc { font-size: 18px; font-weight: 300; color: var(--muted); }
+
+  /* CARDS GRID */
+  .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 40px;
+    display: flex; flex-direction: column; gap: 20px;
+    transition: all 0.3s;
+  }
+  .card:hover { background: rgba(255,255,255,0.04); border-color: rgba(33,150,243,0.2); transform: translateY(-2px); }
+  .card-icon {
+    width: 60px; height: 60px;
+    background: rgba(33,150,243,0.1);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card-icon svg { width: 28px; height: 28px; stroke: var(--blue); fill: none; stroke-width: 1.8; }
+  .card-title { font-size: 22px; font-weight: 600; }
+  .card-desc { font-size: 15px; color: var(--muted); line-height: 1.65; }
+  .card-link { font-size: 14px; font-weight: 500; color: var(--blue); display: flex; align-items: center; gap: 6px; cursor: pointer; margin-top: auto; }
+  .card-link svg { width: 14px; height: 14px; stroke: var(--blue); fill: none; stroke-width: 2; }
+
+  /* STATS */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+  .stat-item { padding: 40px; border-right: 1px solid var(--border-thin); }
+  .stat-item:last-child { border-right: none; }
+  .stat-number { font-size: 48px; font-weight: 800; color: var(--blue); line-height: 1; }
+  .stat-label { font-size: 14px; color: var(--muted); margin-top: 8px; }
+
+  /* CTA SECTION */
+  .cta-section {
+    padding: 100px 72px;
+    background: linear-gradient(135deg, #0F2744 0%, #0E0E10 100%);
+    border-top: 1px solid rgba(33,150,243,0.15);
+    display: flex; flex-direction: column; gap: 32px; align-items: flex-start;
+  }
+  .cta-title { font-size: 48px; font-weight: 700; max-width: 700px; letter-spacing: -0.5px; }
+  .cta-desc { font-size: 18px; color: var(--muted); max-width: 600px; line-height: 1.6; font-weight: 300; }
+  .cta-btns { display: flex; gap: 16px; }
+
+  /* ROUTES */
+  .routes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .route-card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 36px 32px;
+    transition: all 0.3s;
+  }
+  .route-card:hover { border-color: rgba(33,150,243,0.3); transform: translateY(-2px); }
+  .route-number { font-size: 11px; font-weight: 700; color: var(--muted3); letter-spacing: 2px; margin-bottom: 16px; }
+  .route-country { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+  .route-subtitle { font-size: 13px; color: var(--blue); font-weight: 500; margin-bottom: 16px; }
+  .route-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* CONSULTING — REG CARDS */
+  .reg-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  .reg-card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 40px; display: flex; flex-direction: column; gap: 24px;
+  }
+  .reg-card-header { display: flex; flex-direction: column; gap: 12px; }
+  .reg-card-title { font-size: 22px; font-weight: 600; }
+  .reg-card-desc { font-size: 15px; color: var(--muted); line-height: 1.6; }
+  .reg-features { display: flex; flex-direction: column; gap: 10px; }
+  .reg-feature { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
+  .reg-feature-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+  .reg-card-btn { margin-top: auto; padding: 12px 24px; background: rgba(33,150,243,0.1); border: 1px solid rgba(33,150,243,0.25); border-radius: 8px; color: var(--blue); font-size: 14px; font-weight: 600; cursor: pointer; text-align: center; transition: all 0.2s; }
+  .reg-card-btn:hover { background: rgba(33,150,243,0.2); }
+
+  /* VISA SECTION */
+  .visa-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .visa-card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 36px; display: flex; flex-direction: column; gap: 18px;
+  }
+  .visa-card-icon { width: 56px; height: 56px; background: rgba(33,150,243,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+  .visa-card-icon svg { width: 26px; height: 26px; stroke: var(--blue); fill: none; stroke-width: 1.8; }
+  .visa-card-title { font-size: 20px; font-weight: 600; }
+  .visa-card-price { font-size: 28px; font-weight: 800; color: var(--blue); }
+  .visa-card-price span { font-size: 14px; font-weight: 400; color: var(--muted); }
+  .visa-card-features { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+  .visa-card-feature { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+  .visa-card-feature-check { width: 16px; height: 16px; background: rgba(33,150,243,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .visa-card-feature-check::after { content: '✓'; font-size: 9px; color: var(--blue); font-weight: 700; }
+
+  /* CONTACTS */
+  .offices-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  .office-card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 48px; display: flex; flex-direction: column; gap: 32px;
+  }
+  .office-header { display: flex; flex-direction: column; gap: 6px; }
+  .office-country { font-size: 26px; font-weight: 700; }
+  .office-city { font-size: 15px; color: var(--blue); font-weight: 500; }
+  .office-details { display: flex; flex-direction: column; gap: 20px; }
+  .office-detail { display: flex; flex-direction: column; gap: 4px; }
+  .office-detail-label { font-size: 12px; font-weight: 600; color: var(--muted3); letter-spacing: 1px; text-transform: uppercase; }
+  .office-detail-value { font-size: 15px; color: var(--white); line-height: 1.5; }
+
+  /* CONTACT FORM */
+  .contact-form-section { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-label { font-size: 13px; font-weight: 500; color: var(--muted2); }
+  .form-input {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; padding: 14px 16px;
+    font-family: 'Inter', sans-serif; font-size: 14px; color: var(--white);
+    outline: none; transition: border-color 0.2s;
+  }
+  .form-input:focus { border-color: var(--blue); }
+  .form-input::placeholder { color: rgba(255,255,255,0.25); }
+  textarea.form-input { resize: vertical; min-height: 120px; }
+  .contact-info { display: flex; flex-direction: column; gap: 28px; }
+  .contact-info-item { display: flex; flex-direction: column; gap: 6px; }
+  .contact-info-label { font-size: 12px; font-weight: 600; color: var(--muted3); letter-spacing: 1.5px; text-transform: uppercase; }
+  .contact-info-value { font-size: 16px; color: var(--white); }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg3);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 72px 72px 40px;
+    display: flex; flex-direction: column; gap: 56px;
+  }
+  .footer-main { display: flex; justify-content: space-between; }
+  .footer-brand { display: flex; flex-direction: column; gap: 20px; max-width: 320px; }
+  .footer-logo { display: flex; align-items: center; gap: 12px; }
+  .footer-logo-icon { width: 40px; height: 40px; background: #0F3D5E; border-radius: 4px; }
+  .footer-logo-text { font-size: 18px; font-weight: 700; }
+  .footer-brand-desc { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.65; }
+  .footer-cols { display: flex; gap: 72px; }
+  .footer-col { display: flex; flex-direction: column; gap: 18px; }
+  .footer-col-title { font-size: 11px; font-weight: 700; color: var(--muted3); letter-spacing: 2px; }
+  .footer-col-links { display: flex; flex-direction: column; gap: 12px; }
+  .footer-col-link { font-size: 14px; color: rgba(255,255,255,0.55); cursor: pointer; transition: color 0.2s; }
+  .footer-col-link:hover { color: var(--white); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-copyright { font-size: 13px; color: var(--muted3); }
+  .footer-socials { display: flex; gap: 12px; }
+  .social-btn { width: 36px; height: 36px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
+  .social-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
+  .social-btn svg { width: 15px; height: 15px; stroke: rgba(255,255,255,0.55); fill: none; stroke-width: 1.8; }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: var(--border-thin); margin: 0 72px; }
+
+  /* PROCESS STEPS */
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .process-step { padding: 40px 36px; border-right: 1px solid var(--border-thin); position: relative; }
+  .process-step:last-child { border-right: none; }
+  .step-num { font-size: 11px; font-weight: 700; color: var(--blue); letter-spacing: 2px; margin-bottom: 20px; }
+  .step-title { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+  .step-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* SCROLL ANIMATIONS */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 1200px) {
+    nav, .hero, .section, .cta-section, footer { padding-left: 40px; padding-right: 40px; }
+    .hero-title { font-size: 48px; }
+    .section-title { font-size: 36px; }
+    .cards-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .routes-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE SWITCHER -->
+<div class="page-switcher">
+  <div class="switcher-logo">
+    <div class="switcher-logo-icon"></div>
+    GlobalTech
+  </div>
+  <div class="switcher-tabs">
+    <button class="tab-btn active" onclick="showPage('trading')">Торговля</button>
+    <button class="tab-btn" onclick="showPage('logistics')">Логистика</button>
+    <button class="tab-btn" onclick="showPage('consulting')">Консалтинг</button>
+    <button class="tab-btn" onclick="showPage('contacts')">Контакты</button>
+  </div>
+  <div style="width:120px"></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TRADING PAGE -->
+<!-- ============================================================ -->
+<div class="page active" id="page-trading">
+  <nav>
+    <div class="nav-logo"><div class="nav-logo-icon"></div><span class="nav-logo-text">GlobalTech</span></div>
+    <div class="nav-links">
+      <a class="nav-link active" onclick="showPage('trading')">Торговля</a>
+      <a class="nav-link" onclick="showPage('logistics')">Логистика</a>
+      <a class="nav-link" onclick="showPage('consulting')">Консалтинг</a>
+      <a class="nav-link" onclick="showPage('contacts')">Контакты</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switcher"><span class="lang-btn">EN</span><span class="lang-btn active">RU</span></div>
+      <div class="nav-cta">Связаться</div>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-badge"><div class="hero-badge-dot"></div><span class="hero-badge-text">Торговля и закупки</span></div>
+    <h1 class="hero-title">Комплексные решения<br>для торговли</h1>
+    <p class="hero-desc">Профессиональный поиск, проверка поставщиков и закупка промышленного оборудования с гарантией качества от ведущих мировых производителей.</p>
+    <div class="hero-btns">
+      <button class="btn-primary">Оставить заявку <svg viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="btn-secondary">Наши услуги</button>
+    </div>
+  </div>
+
+  <div class="section alt fade-in">
+    <div class="section-header">
+      <div class="section-label"><div class="section-label-line"></div><span class="section-label-text">НАШИ УСЛУГИ</span></div>
+      <h2 class="section-title">Торговые услуги</h2>
+      <p class="section-desc">Полный цикл услуг по поиску, проверке и закупке промышленного оборудования</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+        <div class="card-title">Поиск товара</div>
+        <div class="card-desc">Профессиональный поиск товаров и оборудования с полной проверкой поставщиков. Гарантия качества и соответствия техническим требованиям.</div>
+        <div class="card-link">Подробнее <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+        <div class="card-title">Закупка товара</div>
+        <div class="card-desc">Организация закупок с последующей продажей. Выгодные условия и полная прозрачность на каждом этапе сделки.</div>
+        <div class="card-link">Подробнее <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <div class="card-title">Продажа техники</div>
+        <div class="card-desc">Продажа промышленной техники и оборудования. Широкий ассортимент от проверенных китайских производителей.</div>
+        <div class="card-link">Подробнее <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in" style="padding-top:0; padding-bottom:0">
+    <div class="stats-row" style="border-top:1px solid var(--border-thin); border-bottom:1px solid var(--border-thin)">
+      <div class="stat-item"><div class="stat-number">500+</div><div class="stat-label">Проверенных поставщиков</div></div>
+      <div class="stat-item"><div class="stat-number">8</div><div class="stat-label">Лет на рынке</div></div>
+      <div class="stat-item"><div class="stat-number">1200+</div><div class="stat-label">Успешных сделок</div></div>
+      <div class="stat-item"><div class="stat-number">15</div><div class="stat-label">Стран присутствия</div></div>
+    </div>
+  </div>
+
+  <div class="cta-section fade-in">
+    <div class="hero-badge"><div class="hero-badge-dot"></div><span class="hero-badge-text">Начать сотрудничество</span></div>
+    <h2 class="cta-title">Готовы начать работу с нами?</h2>
+    <p class="cta-desc">Оставьте заявку и наш специалист свяжется с вами в течение 24 часов для обсуждения вашего проекта.</p>
+    <div class="cta-btns">
+      <button class="btn-primary">Оставить заявку <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="btn-secondary">Скачать каталог</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo"><div class="footer-logo-icon"></div><span class="footer-logo-text">GlobalTech</span></div>
+        <p class="footer-brand-desc">Премиальные решения по промышленным закупкам и логистике для глобальных предприятий.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <div class="footer-col-title">УСЛУГИ</div>
+          <div class="footer-col-links">
+            <span class="footer-col-link">Торговля</span>
+            <span class="footer-col-link">Логистика</span>
+            <span class="footer-col-link">Консалтинг</span>
+            <span class="footer-col-link">Производство</span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">КОМПАНИЯ</div>
+          <div class="footer-col-links">
+            <span class="footer-col-link">О нас</span>
+            <span class="footer-col-link">Команда</span>
+            <span class="footer-col-link">Карьера</span>
+            <span class="footer-col-link">Новости</span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">КОНТАКТЫ</div>
+          <div class="footer-col-links">
+            <span class="footer-col-link">Офис в Китае</span>
+            <span class="footer-col-link">Офис в Узбекистане</span>
+            <span class="footer-col-link">info@globaltech.com</span>
+            <span class="footer-col-link">+998 90 123 45 67</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copyright">© 2026 GlobalTech Industries. Все права защищены.</span>
+      <div class="footer-socials">
+        <div class="social-btn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+        <div class="social-btn"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></div>
+        <div class="social-btn"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.47a2.78 2.78 0 0 0-1.95 1.97A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ============================================================ -->
+<!-- LOGISTICS PAGE -->
+<!-- ============================================================ -->
+<div class="page" id="page-logistics">
+  <nav>
+    <div class="nav-logo"><div class="nav-logo-icon"></div><span class="nav-logo-text">GlobalTech</span></div>
+    <div class="nav-links">
+      <a class="nav-link" onclick="showPage('trading')">Торговля</a>
+      <a class="nav-link active" onclick="showPage('logistics')">Логистика</a>
+      <a class="nav-link" onclick="showPage('consulting')">Консалтинг</a>
+      <a class="nav-link" onclick="showPage('contacts')">Контакты</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switcher"><span class="lang-btn">EN</span><span class="lang-btn active">RU</span></div>
+      <div class="nav-cta">Связаться</div>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-badge"><div class="hero-badge-dot"></div><span class="hero-badge-text">Логистические услуги</span></div>
+    <h1 class="hero-title">Международная<br>логистика из Китая</h1>
+    <p class="hero-desc">Полный цикл логистических услуг: доставка грузов из Китая в Россию, страны СНГ и Европу. Надёжность, скорость и прозрачность на каждом этапе.</p>
+    <div class="hero-btns">
+      <button class="btn-primary">Рассчитать стоимость <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="btn-secondary">Отследить груз</button>
+    </div>
+  </div>
+
+  <div class="section alt fade-in">
+    <div class="section-header">
+      <div class="section-label"><div class="section-label-line"></div><span class="section-label-text">НАПРАВЛЕНИЯ</span></div>
+      <h2 class="section-title">Основные направления</h2>
+      <p class="section-desc">Из Китая в любую точку мира — мы обеспечим доставку вашего груза</p>
+    </div>
+    <div class="routes-grid">
+      <div class="route-card">
+        <div class="route-number">01 — ОТПРАВЛЕНИЕ</div>
+        <div class="route-country">Китай</div>
+        <div class="route-subtitle">Точка отправления</div>
+        <div class="route-desc">Гуанчжоу, Шэньчжэнь, Иу, Шанхай и другие города</div>
+      </div>
+      <div class="route-card">
+        <div class="route-number">02 — НАПРАВЛЕНИЕ</div>
+        <div class="route-country">Россия</div>
+        <div class="route-subtitle">Доставка до двери</div>
+        <div class="route-desc">Москва, СПб и регионы. Сроки от 15 дней</div>
+      </div>
+      <div class="route-card">
+        <div class="route-number">03 — НАПРАВЛЕНИЕ</div>
+        <div class="route-country">Азия</div>
+        <div class="route-subtitle">Казахстан, Узбекистан</div>
+        <div class="route-desc">Центральная Азия. Сроки от 7 дней</div>
+      </div>
+      <div class="route-card">
+        <div class="route-number">04 — НАПРАВЛЕНИЕ</div>
+        <div class="route-country">США</div>
+        <div class="route-subtitle">Морская доставка</div>
+        <div class="route-desc">Все штаты Америки. Сроки от 25 дней</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="section-header">
+      <div class="section-label"><div class="section-label-line"></div><span class="section-label-text">НАШИ УСЛУГИ</span></div>
+      <h2 class="section-title">Полный цикл логистики</h2>
+      <p class="section-desc">От склада поставщика до вашего офиса — единая цепочка без посредников</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <div class="card-title">Авиадоставка</div>
+        <div class="card-desc">Экспресс-доставка грузов авиатранспортом. Минимальные сроки, максимальная надёжность.</div>
+        <div class="card-link">Подробнее <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+        <div class="card-title">Морская доставка</div>
+        <div class="card-desc">Контейнерные перевозки FCL и LCL. Оптимальное соотношение цены и сроков.</div>
+        <div class="card-link">Подробнее <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="card-title">Таможенное оформление</div>
+        <div class="card-desc">Полное таможенное оформление грузов. Минимизация рисков и ускорение прохождения границы.</div>
+        <div class="card-link">Подробнее <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in" style="padding-top:0; padding-bottom:0">
+    <div class="stats-row" style="border-top:1px solid var(--border-thin); border-bottom:1px solid var(--border-thin)">
+      <div class="stat-item"><div class="stat-number">50+</div><div class="stat-label">Направлений доставки</div></div>
+      <div class="stat-item"><div class="stat-number">99%</div><div class="stat-label">Доставок без потерь</div></div>
+      <div class="stat-item"><div class="stat-number">3000+</div><div class="stat-label">Успешных отгрузок</div></div>
+      <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Поддержка клиентов</div></div>
+    </div>
+  </div>
+
+  <div class="cta-section fade-in">
+    <div class="hero-badge"><div class="hero-badge-dot"></div><span class="hero-badge-text">Рассчитать доставку</span></div>
+    <h2 class="cta-title">Нужна доставка из Китая?</h2>
+    <p class="cta-desc">Получите точный расчёт стоимости и сроков доставки вашего груза в течение 2 часов.</p>
+    <div class="cta-btns">
+      <button class="btn-primary">Рассчитать стоимость <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="btn-secondary">Наши маршруты</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo"><div class="footer-logo-icon"></div><span class="footer-logo-text">GlobalTech</span></div>
+        <p class="footer-brand-desc">Премиальные решения по промышленным закупкам и логистике для глобальных предприятий.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col"><div class="footer-col-title">УСЛУГИ</div><div class="footer-col-links"><span class="footer-col-link">Торговля</span><span class="footer-col-link">Логистика</span><span class="footer-col-link">Консалтинг</span><span class="footer-col-link">Производство</span></div></div>
+        <div class="footer-col"><div class="footer-col-title">КОМПАНИЯ</div><div class="footer-col-links"><span class="footer-col-link">О нас</span><span class="footer-col-link">Команда</span><span class="footer-col-link">Карьера</span><span class="footer-col-link">Новости</span></div></div>
+        <div class="footer-col"><div class="footer-col-title">КОНТАКТЫ</div><div class="footer-col-links"><span class="footer-col-link">Офис в Китае</span><span class="footer-col-link">Офис в Узбекистане</span><span class="footer-col-link">info@globaltech.com</span><span class="footer-col-link">+998 90 123 45 67</span></div></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copyright">© 2026 GlobalTech Industries. Все права защищены.</span>
+      <div class="footer-socials">
+        <div class="social-btn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+        <div class="social-btn"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></div>
+        <div class="social-btn"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.47a2.78 2.78 0 0 0-1.95 1.97A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ============================================================ -->
+<!-- CONSULTING PAGE -->
+<!-- ============================================================ -->
+<div class="page" id="page-consulting">
+  <nav>
+    <div class="nav-logo"><div class="nav-logo-icon"></div><span class="nav-logo-text">GlobalTech</span></div>
+    <div class="nav-links">
+      <a class="nav-link" onclick="showPage('trading')">Торговля</a>
+      <a class="nav-link" onclick="showPage('logistics')">Логистика</a>
+      <a class="nav-link active" onclick="showPage('consulting')">Консалтинг</a>
+      <a class="nav-link" onclick="showPage('contacts')">Контакты</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switcher"><span class="lang-btn">EN</span><span class="lang-btn active">RU</span></div>
+      <div class="nav-cta">Связаться</div>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-badge"><div class="hero-badge-dot"></div><span class="hero-badge-text">Консалтинговые услуги</span></div>
+    <h1 class="hero-title">Бизнес-консалтинг<br>в Китае</h1>
+    <p class="hero-desc">Регистрация компаний, визовый сервис и подготовка документов для успешного ведения бизнеса в Китае и Гонконге.</p>
+    <div class="hero-btns">
+      <button class="btn-primary">Получить консультацию <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="btn-secondary">Узнать стоимость</button>
+    </div>
+  </div>
+
+  <div class="section alt fade-in">
+    <div class="section-header">
+      <div class="section-label"><div class="section-label-line"></div><span class="section-label-text">РЕГИСТРАЦИЯ КОМПАНИЙ</span></div>
+      <h2 class="section-title">Регистрация юридических лиц</h2>
+      <p class="section-desc">Полное сопровождение процесса регистрации компаний в Китае и Гонконге</p>
+    </div>
+    <div class="reg-grid">
+      <div class="reg-card">
+        <div class="reg-card-header">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <div class="reg-card-title">Китай (материковый)</div>
+          <div class="reg-card-desc">Регистрация WFOE, Joint Venture и Representative Office. Полное юридическое сопровождение.</div>
+        </div>
+        <div class="reg-features">
+          <div class="reg-feature"><div class="reg-feature-dot"></div>Бизнес-лицензия и печать компании</div>
+          <div class="reg-feature"><div class="reg-feature-dot"></div>Открытие банковского счёта</div>
+          <div class="reg-feature"><div class="reg-feature-dot"></div>Налоговая регистрация</div>
+          <div class="reg-feature"><div class="reg-feature-dot"></div>Юридический адрес на 1 год</div>
+        </div>
+        <div class="reg-card-btn">Узнать подробнее</div>
+      </div>
+      <div class="reg-card">
+        <div class="reg-card-header">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <div class="reg-card-title">Гонконг</div>
+          <div class="reg-card-desc">Регистрация Limited Company в Гонконге. Оффшорная юрисдикция с минимальным налогообложением.</div>
+        </div>
+        <div class="reg-features">
+          <div class="reg-feature"><div class="reg-feature-dot"></div>Ставка налога 0% на оффшорную прибыль</div>
+          <div class="reg-feature"><div class="reg-feature-dot"></div>Удалённое управление компанией</div>
+          <div class="reg-feature"><div class="reg-feature-dot"></div>Корпоративный банковский счёт</div>
+          <div class="reg-feature"><div class="reg-feature-dot"></div>Ежегодное обслуживание</div>
+        </div>
+        <div class="reg-card-btn">Узнать подробнее</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="section-header">
+      <div class="section-label"><div class="section-label-line"></div><span class="section-label-text">ВИЗОВЫЙ СЕРВИС</span></div>
+      <h2 class="section-title">Визовое сопровождение</h2>
+      <p class="section-desc">Деловые визы в Китай, Гонконг и другие страны Азии</p>
+    </div>
+    <div class="visa-grid">
+      <div class="visa-card">
+        <div class="visa-card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div class="visa-card-title">Бизнес-виза (M)</div>
+        <div class="visa-card-price">от $150 <span>/ чел.</span></div>
+        <div class="visa-card-features">
+          <div class="visa-card-feature"><div class="visa-card-feature-check"></div>Однократная / многократная</div>
+          <div class="visa-card-feature"><div class="visa-card-feature-check"></div>Срок оформления 5–7 дней</div>
+          <div class="visa-card-feature"><div class="visa-card-feature-check"></div>Приглашение от китайской компании</div>
+        </div>
+      </div>
+      <div class="visa-card">
+        <div class="visa-card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="visa-card-title">Рабочая виза (Z)</div>
+        <div class="visa-card-price">от $350 <span>/ чел.</span></div>
+        <div class="visa-card-features">
+          <div class="visa-card-feature"><div class="visa-card-feature-check"></div>Разрешение на работу в КНР</div>
+          <div class="visa-card-feature"><div class="visa-card-feature-check"></div>Оформление резидентства</div>
+          <div class="visa-card-feature"><div class="visa-card-feature-check"></div>Полный пакет документов</div>
+        </div>
+      </div>
+      <div class="visa-card">
+        <div class="visa-card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <div class="visa-card-title">Гонконгская виза</div>
+        <div class="visa-card-price">от $200 <span>/ чел.</span></div>
+        <div class="visa-card-features">
+          <div class="visa-card-feature"><div class="visa-card-feature-check"></div>Деловые поездки и резидентство</div>
+          <div class="visa-card-feature"><div class="visa-card-feature-check"></div>Employment Visa</div>
+          <div class="visa-card-feature"><div class="visa-card-feature-check"></div>Инвестиционная виза</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section alt fade-in" style="padding-top:0; padding-bottom:0">
+    <div class="stats-row" style="border-top:1px solid var(--border-thin); border-bottom:1px solid var(--border-thin)">
+      <div class="stat-item"><div class="stat-number">300+</div><div class="stat-label">Зарегистрированных компаний</div></div>
+      <div class="stat-item"><div class="stat-number">98%</div><div class="stat-label">Успешных оформлений</div></div>
+      <div class="stat-item"><div class="stat-number">5</div><div class="stat-label">Лет юридической практики</div></div>
+      <div class="stat-item"><div class="stat-number">2000+</div><div class="stat-label">Виз оформлено</div></div>
+    </div>
+  </div>
+
+  <div class="cta-section fade-in">
+    <div class="hero-badge"><div class="hero-badge-dot"></div><span class="hero-badge-text">Бесплатная консультация</span></div>
+    <h2 class="cta-title">Готовы открыть бизнес в Китае?</h2>
+    <p class="cta-desc">Наши юристы проконсультируют вас по всем вопросам регистрации и ведения бизнеса в Китае и Гонконге.</p>
+    <div class="cta-btns">
+      <button class="btn-primary">Получить консультацию <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="btn-secondary">Узнать стоимость</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo"><div class="footer-logo-icon"></div><span class="footer-logo-text">GlobalTech</span></div>
+        <p class="footer-brand-desc">Премиальные решения по промышленным закупкам и логистике для глобальных предприятий.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col"><div class="footer-col-title">УСЛУГИ</div><div class="footer-col-links"><span class="footer-col-link">Торговля</span><span class="footer-col-link">Логистика</span><span class="footer-col-link">Консалтинг</span><span class="footer-col-link">Производство</span></div></div>
+        <div class="footer-col"><div class="footer-col-title">КОМПАНИЯ</div><div class="footer-col-links"><span class="footer-col-link">О нас</span><span class="footer-col-link">Команда</span><span class="footer-col-link">Карьера</span><span class="footer-col-link">Новости</span></div></div>
+        <div class="footer-col"><div class="footer-col-title">КОНТАКТЫ</div><div class="footer-col-links"><span class="footer-col-link">Офис в Китае</span><span class="footer-col-link">Офис в Узбекистане</span><span class="footer-col-link">info@globaltech.com</span><span class="footer-col-link">+998 90 123 45 67</span></div></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copyright">© 2026 GlobalTech Industries. Все права защищены.</span>
+      <div class="footer-socials">
+        <div class="social-btn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+        <div class="social-btn"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></div>
+        <div class="social-btn"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.47a2.78 2.78 0 0 0-1.95 1.97A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ============================================================ -->
+<!-- CONTACTS PAGE -->
+<!-- ============================================================ -->
+<div class="page" id="page-contacts">
+  <nav>
+    <div class="nav-logo"><div class="nav-logo-icon"></div><span class="nav-logo-text">GlobalTech</span></div>
+    <div class="nav-links">
+      <a class="nav-link" onclick="showPage('trading')">Торговля</a>
+      <a class="nav-link" onclick="showPage('logistics')">Логистика</a>
+      <a class="nav-link" onclick="showPage('consulting')">Консалтинг</a>
+      <a class="nav-link active" onclick="showPage('contacts')">Контакты</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switcher"><span class="lang-btn">EN</span><span class="lang-btn active">RU</span></div>
+      <div class="nav-cta" style="background:var(--blue); border-color:var(--blue)">Связаться</div>
+    </div>
+  </nav>
+
+  <div class="hero" style="min-height:480px">
+    <div class="hero-badge"><div class="hero-badge-dot"></div><span class="hero-badge-text">Свяжитесь с нами</span></div>
+    <h1 class="hero-title" style="font-size:56px">Контакты</h1>
+    <p class="hero-desc" style="font-size:18px">Мы всегда на связи и готовы ответить на ваши вопросы</p>
+  </div>
+
+  <div class="section alt fade-in">
+    <div class="section-header">
+      <div class="section-label"><div class="section-label-line"></div><span class="section-label-text">НАШИ ОФИСЫ</span></div>
+      <h2 class="section-title">Глобальное присутствие</h2>
+    </div>
+    <div class="offices-grid">
+      <div class="office-card">
+        <div class="office-header">
+          <div class="office-country">Китай</div>
+          <div class="office-city">Гуанчжоу, провинция Гуандун</div>
+        </div>
+        <div class="office-details">
+          <div class="office-detail"><div class="office-detail-label">Адрес</div><div class="office-detail-value">Room 1205, Building A, Tianhe District,<br>Guangzhou, Guangdong 510620, China</div></div>
+          <div class="office-detail"><div class="office-detail-label">Телефон</div><div class="office-detail-value">+86 20 1234 5678</div></div>
+          <div class="office-detail"><div class="office-detail-label">Email</div><div class="office-detail-value">china@globaltech.com</div></div>
+          <div class="office-detail"><div class="office-detail-label">Часы работы</div><div class="office-detail-value">Пн–Пт: 09:00 – 18:00 (GMT+8)</div></div>
+        </div>
+      </div>
+      <div class="office-card">
+        <div class="office-header">
+          <div class="office-country">Узбекистан</div>
+          <div class="office-city">Ташкент</div>
+        </div>
+        <div class="office-details">
+          <div class="office-detail"><div class="office-detail-label">Адрес</div><div class="office-detail-value">ул. Амира Темура, 107А,<br>Ташкент, 100084, Узбекистан</div></div>
+          <div class="office-detail"><div class="office-detail-label">Телефон</div><div class="office-detail-value">+998 90 123 45 67</div></div>
+          <div class="office-detail"><div class="office-detail-label">Email</div><div class="office-detail-value">uzbekistan@globaltech.com</div></div>
+          <div class="office-detail"><div class="office-detail-label">Часы работы</div><div class="office-detail-value">Пн–Пт: 09:00 – 18:00 (GMT+5)</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="section-header" style="margin-bottom:48px">
+      <div class="section-label"><div class="section-label-line"></div><span class="section-label-text">НАПИСАТЬ НАМ</span></div>
+      <h2 class="section-title">Оставьте заявку</h2>
+    </div>
+    <div class="contact-form-section">
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Имя</label><input class="form-input" placeholder="Ваше имя"></div>
+          <div class="form-group"><label class="form-label">Компания</label><input class="form-input" placeholder="Название компании"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Email</label><input class="form-input" placeholder="email@company.com"></div>
+          <div class="form-group"><label class="form-label">Телефон</label><input class="form-input" placeholder="+998 90 000 00 00"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Сообщение</label><textarea class="form-input" placeholder="Опишите ваш запрос..."></textarea></div>
+        <button class="btn-primary" style="width:fit-content">Отправить заявку <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <div class="contact-info">
+        <div style="font-size:22px;font-weight:600;margin-bottom:8px">Свяжитесь напрямую</div>
+        <div style="font-size:15px;color:var(--muted);line-height:1.6;margin-bottom:32px">Наши специалисты ответят на все вопросы в рабочие часы. Для срочных запросов — звоните напрямую.</div>
+        <div class="contact-info-item"><div class="contact-info-label">Общий запрос</div><div class="contact-info-value">info@globaltech.com</div></div>
+        <div class="contact-info-item"><div class="contact-info-label">Торговля</div><div class="contact-info-value">trade@globaltech.com</div></div>
+        <div class="contact-info-item"><div class="contact-info-label">Логистика</div><div class="contact-info-value">logistics@globaltech.com</div></div>
+        <div class="contact-info-item"><div class="contact-info-label">Консалтинг</div><div class="contact-info-value">consulting@globaltech.com</div></div>
+        <div class="contact-info-item"><div class="contact-info-label">Телефон (Ташкент)</div><div class="contact-info-value">+998 90 123 45 67</div></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo"><div class="footer-logo-icon"></div><span class="footer-logo-text">GlobalTech</span></div>
+        <p class="footer-brand-desc">Премиальные решения по промышленным закупкам и логистике для глобальных предприятий.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col"><div class="footer-col-title">УСЛУГИ</div><div class="footer-col-links"><span class="footer-col-link">Торговля</span><span class="footer-col-link">Логистика</span><span class="footer-col-link">Консалтинг</span><span class="footer-col-link">Производство</span></div></div>
+        <div class="footer-col"><div class="footer-col-title">КОМПАНИЯ</div><div class="footer-col-links"><span class="footer-col-link">О нас</span><span class="footer-col-link">Команда</span><span class="footer-col-link">Карьера</span><span class="footer-col-link">Новости</span></div></div>
+        <div class="footer-col"><div class="footer-col-title">КОНТАКТЫ</div><div class="footer-col-links"><span class="footer-col-link">Офис в Китае</span><span class="footer-col-link">Офис в Узбекистане</span><span class="footer-col-link">info@globaltech.com</span><span class="footer-col-link">+998 90 123 45 67</span></div></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copyright">© 2026 GlobalTech Industries. Все права защищены.</span>
+      <div class="footer-socials">
+        <div class="social-btn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+        <div class="social-btn"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></div>
+        <div class="social-btn"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.47a2.78 2.78 0 0 0-1.95 1.97A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    const idx = ['trading','logistics','consulting','contacts'].indexOf(name);
+    document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    setTimeout(initFadeIns, 100);
+  }
+
+  function initFadeIns() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.page.active .fade-in').forEach(el => {
+      el.classList.remove('visible');
+      observer.observe(el);
+    });
+  }
+
+  // Init on load
+  window.addEventListener('load', () => {
+    setTimeout(initFadeIns, 200);
+  });
+</script>
+</body>
+</html>
