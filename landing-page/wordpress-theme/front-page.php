@@ -147,7 +147,7 @@ get_header();
         <div class="about-grid">
             <div class="about-content reveal">
                 <div class="section-label" data-i18n="about.label">About Us</div>
-                <h2 data-i18n="about.title">GlobalTech Industries</h2>
+                <h2 data-i18n="about.title">Davs Global</h2>
                 <p class="about-desc" data-i18n="about.desc">We are a team of professionals specializing in international trade, logistics, and business consulting. With offices in China and Uzbekistan, we help businesses establish reliable supply chains and navigate the complexities of cross-border commerce.</p>
                 <div class="about-features">
                     <div class="about-feature">

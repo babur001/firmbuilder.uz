@@ -47,23 +47,19 @@
             <div class="sv-contact-info-sub" data-i18n="contact.direct_desc">Our specialists will answer all questions during business hours. For urgent requests — call directly.</div>
             <div class="sv-contact-info-item">
                 <div class="sv-contact-info-label" data-i18n="contact.general">General inquiry</div>
-                <div class="sv-contact-info-value"><?php echo antispambot(get_theme_mod('gt_email', 'info@globaltech.com')); ?></div>
+                <div class="sv-contact-info-value"><a href="mailto:<?php echo antispambot(get_theme_mod('gt_email', 'contact@firmbuilder.asia')); ?>"><?php echo antispambot(get_theme_mod('gt_email', 'contact@firmbuilder.asia')); ?></a></div>
             </div>
             <div class="sv-contact-info-item">
                 <div class="sv-contact-info-label" data-i18n="nav.trading">Trading</div>
-                <div class="sv-contact-info-value">trade@globaltech.com</div>
+                <div class="sv-contact-info-value"><a href="mailto:sales@firmbuilder.asia">sales@firmbuilder.asia</a></div>
             </div>
             <div class="sv-contact-info-item">
-                <div class="sv-contact-info-label" data-i18n="nav.logistics">Logistics</div>
-                <div class="sv-contact-info-value">logistics@globaltech.com</div>
-            </div>
-            <div class="sv-contact-info-item">
-                <div class="sv-contact-info-label" data-i18n="nav.consulting">Consulting</div>
-                <div class="sv-contact-info-value">consulting@globaltech.com</div>
+                <div class="sv-contact-info-label" data-i18n="contact.phone_china">Phone (China)</div>
+                <div class="sv-contact-info-value"><a href="tel:<?php echo esc_attr(get_theme_mod('gt_china_phone', '+8613116572036')); ?>"><?php echo esc_html(get_theme_mod('gt_china_phone', '+8613116572036')); ?></a></div>
             </div>
             <div class="sv-contact-info-item">
                 <div class="sv-contact-info-label" data-i18n="contact.phone_tashkent">Phone (Tashkent)</div>
-                <div class="sv-contact-info-value"><?php echo esc_html(get_theme_mod('gt_uz_phone', '+998 90 123 45 67')); ?></div>
+                <div class="sv-contact-info-value"><a href="tel:<?php echo esc_attr(get_theme_mod('gt_uz_phone', '+998930777700')); ?>"><?php echo esc_html(get_theme_mod('gt_uz_phone', '+998930777700')); ?></a></div>
             </div>
         </div>
     </div>

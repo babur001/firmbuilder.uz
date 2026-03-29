@@ -9,7 +9,7 @@
                             <path d="M30 15 L60 50 L30 85" stroke="#2196F3" stroke-width="4" fill="none"/>
                         </svg>
                     </div>
-                    <div class="logo-text">Global<span>Tech</span></div>
+                    <div class="logo-text">Davs<span>Global</span></div>
                 </a>
                 <p data-i18n="footer.brand_desc"><?php bloginfo('description'); ?></p>
             </div>
@@ -18,6 +18,7 @@
                 <ul>
                     <li><a href="<?php echo esc_url(home_url('/trading/')); ?>" data-i18n="nav.trading">Trading</a></li>
                     <li><a href="<?php echo esc_url(home_url('/logistics/')); ?>" data-i18n="nav.logistics">Logistics</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/equipment/')); ?>" data-i18n="nav.equipment">Equipment</a></li>
                     <li><a href="<?php echo esc_url(home_url('/consulting/')); ?>" data-i18n="nav.consulting">Consulting</a></li>
                 </ul>
             </div>
@@ -39,14 +40,14 @@
                     <?php if (get_theme_mod('gt_uz_phone')) : ?>
                     <li><a href="tel:<?php echo esc_attr(get_theme_mod('gt_uz_phone')); ?>"><?php echo esc_html(get_theme_mod('gt_uz_phone')); ?></a></li>
                     <?php endif; ?>
-                    <li><a href="mailto:<?php echo antispambot(get_theme_mod('gt_email','info@globaltech.com')); ?>">
-                        <?php echo antispambot(get_theme_mod('gt_email','info@globaltech.com')); ?>
+                    <li><a href="mailto:<?php echo antispambot(get_theme_mod('gt_email','contact@firmbuilder.asia')); ?>">
+                        <?php echo antispambot(get_theme_mod('gt_email','contact@firmbuilder.asia')); ?>
                     </a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p data-i18n="footer.copyright">© <?php echo date('Y'); ?> GlobalTech Industries. All rights reserved.</p>
+            <p data-i18n="footer.copyright">© <?php echo date('Y'); ?> Davs Global. All rights reserved.</p>
             <div class="footer-socials">
                 <?php if (get_theme_mod('gt_linkedin')) : ?>
                 <a href="<?php echo esc_url(get_theme_mod('gt_linkedin')); ?>" class="social-link" aria-label="LinkedIn" target="_blank">

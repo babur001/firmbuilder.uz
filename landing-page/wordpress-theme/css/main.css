@@ -132,8 +132,12 @@ p { font-weight: 300; color: rgba(255, 255, 255, 0.8); }
     background: var(--electric-blue);
     transition: width 0.3s var(--transition-smooth);
 }
-.navbar > .nav-links a:hover { color: var(--white); }
-.navbar > .nav-links a:hover::after { width: 100%; }
+.navbar > .nav-links a:hover,
+.navbar > .nav-links a.active { color: var(--white); }
+.navbar > .nav-links a:hover::after,
+.navbar > .nav-links a.active::after { width: 100%; }
+
+.mobile-menu a.active { color: var(--electric-blue); }
 
 .nav-right { display: flex; align-items: center; }
 .nav-cta {
@@ -1442,6 +1446,7 @@ a.service-card *, a.service-card:visited *, a.service-card:hover *, a.service-ca
     white-space: pre-line;
     color: var(--white);
 }
+.sv-hero-title .blue { color: var(--sv-blue); }
 .sv-hero-desc {
     font-size: 20px;
     font-weight: 300;
@@ -1582,6 +1587,7 @@ a.service-card *, a.service-card:visited *, a.service-card:hover *, a.service-ca
     font-weight: 600;
     color: var(--white);
 }
+.sv-card:hover .sv-card-title { color: var(--sv-blue); }
 .sv-card-desc {
     font-size: 15px;
     color: var(--sv-muted);
@@ -1870,6 +1876,41 @@ a.service-card *, a.service-card:visited *, a.service-card:hover *, a.service-ca
     line-height: 1.6;
 }
 
+/* Steps */
+.sv-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+.sv-step {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 28px 32px;
+    border-bottom: 1px solid var(--sv-border-thin);
+    border-radius: 12px;
+    transition: background 0.3s;
+}
+.sv-step:hover {
+    background: rgba(33,150,243,0.05);
+}
+.sv-step:last-child { border-bottom: none; }
+.sv-step-number {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--sv-blue);
+    min-width: 56px;
+    text-shadow: 0 0 20px rgba(33,150,243,0.3);
+}
+.sv-step-content { flex: 1; }
+.sv-step .sv-step-title {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
 /* Fade In Animations */
 .sv-fade-in {
     opacity: 0;
@@ -2145,6 +2186,14 @@ textarea.sv-form-input {
 .sv-contact-info-value {
     font-size: 16px;
     color: var(--white);
+}
+.sv-contact-info-value a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.sv-contact-info-value a:hover {
+    color: var(--sv-blue);
 }
 
 @media (max-width: 1024px) {

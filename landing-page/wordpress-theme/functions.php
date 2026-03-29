@@ -104,7 +104,7 @@ function globaltech_handle_contact(WP_REST_Request $request) {
     $message = $request->get_param('message');
 
     $admin_email = get_option('admin_email');
-    $subject     = sprintf('[GlobalTech] New inquiry from %s (%s)', $name, $company);
+    $subject     = sprintf('[Davs Global] New inquiry from %s (%s)', $name, $company);
 
     $body  = "New contact form submission:\n\n";
     $body .= "Name:    $name\n";
@@ -197,7 +197,7 @@ function globaltech_customize_register($wp_customize) {
         'priority' => 30,
     ]);
 
-    $wp_customize->add_setting('gt_email', ['default' => 'info@globaltech.com', 'sanitize_callback' => 'sanitize_email']);
+    $wp_customize->add_setting('gt_email', ['default' => 'contact@firmbuilder.asia', 'sanitize_callback' => 'sanitize_email']);
     $wp_customize->add_control('gt_email', [
         'label'   => __('Email Address', 'globaltech'),
         'section' => 'globaltech_contact',

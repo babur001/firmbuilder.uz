@@ -3,6 +3,7 @@
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="<?php echo esc_url(get_template_directory_uri() . '/assets/favicon.svg'); ?>">
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -20,12 +21,13 @@
             </svg>
             <?php endif; ?>
         </div>
-        <div class="logo-text">Global<span>Tech</span></div>
+        <div class="logo-text">Davs<span>Global</span></div>
     </a>
 
     <ul class="nav-links">
         <li><a href="<?php echo esc_url(home_url('/trading/')); ?>" data-i18n="nav.trading"><?php esc_html_e('Trading', 'globaltech'); ?></a></li>
         <li><a href="<?php echo esc_url(home_url('/logistics/')); ?>" data-i18n="nav.logistics"><?php esc_html_e('Logistics', 'globaltech'); ?></a></li>
+        <li><a href="<?php echo esc_url(home_url('/equipment/')); ?>" data-i18n="nav.equipment"><?php esc_html_e('Equipment', 'globaltech'); ?></a></li>
         <li><a href="<?php echo esc_url(home_url('/consulting/')); ?>" data-i18n="nav.consulting"><?php esc_html_e('Consulting', 'globaltech'); ?></a></li>
         <li><a href="<?php echo esc_url(home_url('/contacts/')); ?>" data-i18n="nav.contacts"><?php esc_html_e('Contacts', 'globaltech'); ?></a></li>
     </ul>
@@ -61,6 +63,7 @@
 <div class="mobile-menu" id="mobileMenu">
     <a href="<?php echo esc_url(home_url('/trading/')); ?>" data-i18n="nav.trading"><?php esc_html_e('Trading', 'globaltech'); ?></a>
     <a href="<?php echo esc_url(home_url('/logistics/')); ?>" data-i18n="nav.logistics"><?php esc_html_e('Logistics', 'globaltech'); ?></a>
+    <a href="<?php echo esc_url(home_url('/equipment/')); ?>" data-i18n="nav.equipment"><?php esc_html_e('Equipment', 'globaltech'); ?></a>
     <a href="<?php echo esc_url(home_url('/consulting/')); ?>" data-i18n="nav.consulting"><?php esc_html_e('Consulting', 'globaltech'); ?></a>
     <a href="<?php echo esc_url(home_url('/contacts/')); ?>" data-i18n="nav.contacts"><?php esc_html_e('Contacts', 'globaltech'); ?></a>
     <div class="mobile-lang">

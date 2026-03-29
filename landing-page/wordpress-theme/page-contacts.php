@@ -37,11 +37,11 @@ get_header();
                 </div>
                 <div class="sv-office-detail">
                     <div class="sv-office-detail-label" data-i18n="contacts.phone">Phone</div>
-                    <div class="sv-office-detail-value"><a href="tel:<?php echo esc_attr(get_theme_mod('gt_china_phone', '+86 20 1234 5678')); ?>"><?php echo esc_html(get_theme_mod('gt_china_phone', '+86 20 1234 5678')); ?></a></div>
+                    <div class="sv-office-detail-value"><a href="tel:<?php echo esc_attr(get_theme_mod('gt_china_phone', '+8613116572036')); ?>"><?php echo esc_html(get_theme_mod('gt_china_phone', '+8613116572036')); ?></a></div>
                 </div>
                 <div class="sv-office-detail">
                     <div class="sv-office-detail-label">Email</div>
-                    <div class="sv-office-detail-value"><a href="mailto:china@globaltech.com">china@globaltech.com</a></div>
+                    <div class="sv-office-detail-value"><a href="mailto:contact@firmbuilder.asia">contact@firmbuilder.asia</a></div>
                 </div>
                 <div class="sv-office-detail">
                     <div class="sv-office-detail-label" data-i18n="contacts.hours">Working hours</div>
@@ -61,11 +61,11 @@ get_header();
                 </div>
                 <div class="sv-office-detail">
                     <div class="sv-office-detail-label" data-i18n="contacts.phone">Phone</div>
-                    <div class="sv-office-detail-value"><a href="tel:<?php echo esc_attr(get_theme_mod('gt_uz_phone', '+998 90 123 45 67')); ?>"><?php echo esc_html(get_theme_mod('gt_uz_phone', '+998 90 123 45 67')); ?></a></div>
+                    <div class="sv-office-detail-value"><a href="tel:<?php echo esc_attr(get_theme_mod('gt_uz_phone', '+998930777700')); ?>"><?php echo esc_html(get_theme_mod('gt_uz_phone', '+998930777700')); ?></a></div>
                 </div>
                 <div class="sv-office-detail">
                     <div class="sv-office-detail-label">Email</div>
-                    <div class="sv-office-detail-value"><a href="mailto:uzbekistan@globaltech.com">uzbekistan@globaltech.com</a></div>
+                    <div class="sv-office-detail-value"><a href="mailto:contact@firmbuilder.asia">contact@firmbuilder.asia</a></div>
                 </div>
                 <div class="sv-office-detail">
                     <div class="sv-office-detail-label" data-i18n="contacts.hours">Working hours</div>
