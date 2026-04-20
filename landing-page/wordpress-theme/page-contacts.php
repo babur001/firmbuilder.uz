@@ -33,7 +33,7 @@ get_header();
             <div class="sv-office-details">
                 <div class="sv-office-detail">
                     <div class="sv-office-detail-label" data-i18n="contacts.address">Address</div>
-                    <div class="sv-office-detail-value"><?php echo esc_html(get_theme_mod('gt_china_address', 'Room 1205, Building A, Tianhe District, Guangzhou, Guangdong 510620, China')); ?></div>
+                    <div class="sv-office-detail-value" data-i18n="contacts.china_address"><?php echo esc_html(get_theme_mod('gt_china_address', 'No. 88 Haiwang Road, Lingang New Area, China (Shanghai) Pilot Free Trade Zone')); ?></div>
                 </div>
                 <div class="sv-office-detail">
                     <div class="sv-office-detail-label" data-i18n="contacts.phone">Phone</div>

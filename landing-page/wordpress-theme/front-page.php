@@ -22,8 +22,8 @@ get_header();
     </div>
     <div class="container hero-content">
         <div class="hero-badge"><span data-i18n="hero.badge">Global Industrial Solutions</span></div>
-        <h1 data-i18n="hero.title">Powering <span class="highlight">Global</span><br>Industrial Growth</h1>
-        <p class="hero-description" data-i18n="hero.description">Premier procurement, logistics, and consulting services for industrial enterprises.</p>
+        <h1 data-i18n="hero.title">We help you build and scale business with <span class="highlight">China</span></h1>
+        <p class="hero-description" data-i18n="hero.description">From sourcing and factory verification to logistics and consulting — we manage the entire process.</p>
         <div class="hero-buttons">
             <a href="#services" class="btn-primary">
                 <span data-i18n="hero.btn_explore">Explore Services</span>
@@ -46,7 +46,7 @@ get_header();
         <div class="services-header reveal">
             <div class="section-label" data-i18n="services.label">What We Do</div>
             <h2 data-i18n="services.title">Core Services</h2>
-            <p data-i18n="services.description">Comprehensive industrial solutions for global enterprises.</p>
+            <p data-i18n="services.description">Everything you need to work with China — in one system.</p>
         </div>
         <div class="services-grid services-grid--4">
             <a href="<?php echo esc_url(home_url('/trading/')); ?>" class="service-card reveal">
@@ -133,7 +133,7 @@ get_header();
 <section class="trust">
     <div class="container">
         <div class="trust-grid">
-            <div class="trust-item reveal"><div class="trust-number" data-target="15">15+</div><div class="trust-label" data-i18n="trust.years">Years Experience</div></div>
+            <div class="trust-item reveal"><div class="trust-number" data-target="5">5</div><div class="trust-label" data-i18n="trust.years">Years Experience</div></div>
             <div class="trust-item reveal"><div class="trust-number" data-target="500">500+</div><div class="trust-label" data-i18n="trust.projects">Projects Completed</div></div>
             <div class="trust-item reveal"><div class="trust-number" data-target="50">50+</div><div class="trust-label" data-i18n="trust.partners">Global Partners</div></div>
             <div class="trust-item reveal"><div class="trust-number" data-target="4">4</div><div class="trust-label" data-i18n="trust.continents">Continents</div></div>
@@ -165,7 +165,7 @@ get_header();
                         </div>
                         <div>
                             <strong data-i18n="about.feature2_title">Global Presence</strong>
-                            <p data-i18n="about.feature2_desc">Offices in Guangzhou and Tashkent with delivery to 15+ countries</p>
+                            <p data-i18n="about.feature2_desc">Offices in Shanghai and Tashkent with delivery to 15+ countries</p>
                         </div>
                     </div>
                     <div class="about-feature">
@@ -181,11 +181,11 @@ get_header();
             </div>
             <div class="about-stats reveal">
                 <div class="about-stat-card">
-                    <div class="about-stat-number">8+</div>
+                    <div class="about-stat-number">5</div>
                     <div class="about-stat-label" data-i18n="about.stat_years">Years on the market</div>
                 </div>
                 <div class="about-stat-card">
-                    <div class="about-stat-number">1200+</div>
+                    <div class="about-stat-number">500+</div>
                     <div class="about-stat-label" data-i18n="about.stat_deals">Successful deals</div>
                 </div>
                 <div class="about-stat-card">

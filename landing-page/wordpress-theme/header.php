@@ -29,6 +29,7 @@
         <li><a href="<?php echo esc_url(home_url('/logistics/')); ?>" data-i18n="nav.logistics"><?php esc_html_e('Logistics', 'globaltech'); ?></a></li>
         <li><a href="<?php echo esc_url(home_url('/equipment/')); ?>" data-i18n="nav.equipment"><?php esc_html_e('Equipment', 'globaltech'); ?></a></li>
         <li><a href="<?php echo esc_url(home_url('/consulting/')); ?>" data-i18n="nav.consulting"><?php esc_html_e('Consulting', 'globaltech'); ?></a></li>
+        <li><a href="<?php echo esc_url(home_url('/#blog')); ?>" data-i18n="nav.news"><?php esc_html_e('News', 'globaltech'); ?></a></li>
         <li><a href="<?php echo esc_url(home_url('/contacts/')); ?>" data-i18n="nav.contacts"><?php esc_html_e('Contacts', 'globaltech'); ?></a></li>
     </ul>
 
@@ -65,6 +66,7 @@
     <a href="<?php echo esc_url(home_url('/logistics/')); ?>" data-i18n="nav.logistics"><?php esc_html_e('Logistics', 'globaltech'); ?></a>
     <a href="<?php echo esc_url(home_url('/equipment/')); ?>" data-i18n="nav.equipment"><?php esc_html_e('Equipment', 'globaltech'); ?></a>
     <a href="<?php echo esc_url(home_url('/consulting/')); ?>" data-i18n="nav.consulting"><?php esc_html_e('Consulting', 'globaltech'); ?></a>
+    <a href="<?php echo esc_url(home_url('/#blog')); ?>" data-i18n="nav.news"><?php esc_html_e('News', 'globaltech'); ?></a>
     <a href="<?php echo esc_url(home_url('/contacts/')); ?>" data-i18n="nav.contacts"><?php esc_html_e('Contacts', 'globaltech'); ?></a>
     <div class="mobile-lang">
         <button class="lang-btn" data-lang="en">EN</button>
