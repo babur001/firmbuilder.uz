@@ -201,6 +201,59 @@ get_header();
     </div>
 </section>
 
+<!-- ===== NEWS / BLOG ===== -->
+<?php
+$gt_blog_query = new WP_Query([
+    'post_type'      => 'post',
+    'posts_per_page' => 3,
+    'post_status'    => 'publish',
+    'ignore_sticky_posts' => true,
+]);
+if ($gt_blog_query->have_posts()) :
+?>
+<section class="blog-section" id="blog">
+    <div class="container">
+        <div class="blog-header reveal">
+            <div class="section-label" data-i18n="blog.label">News</div>
+            <h2 data-i18n="blog.title">Latest News</h2>
+            <p data-i18n="blog.description">Updates from our projects, market insights, and company news.</p>
+        </div>
+        <div class="blog-grid">
+            <?php while ($gt_blog_query->have_posts()) : $gt_blog_query->the_post(); ?>
+            <a href="<?php the_permalink(); ?>" class="blog-card reveal">
+                <div class="blog-card-image">
+                    <?php if (has_post_thumbnail()) :
+                        the_post_thumbnail('globaltech-blog-card');
+                    else : ?>
+                        <div class="blog-card-image-placeholder">&#9881;</div>
+                    <?php endif; ?>
+                </div>
+                <div class="blog-card-meta">
+                    <?php $cat = get_the_category(); if ($cat) : ?>
+                    <span class="blog-card-category"><?php echo esc_html($cat[0]->name); ?></span>
+                    <?php endif; ?>
+                    <span class="blog-card-date"><?php echo get_the_date(); ?></span>
+                </div>
+                <div class="blog-card-body">
+                    <h3><?php the_title(); ?></h3>
+                    <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 20)); ?></p>
+                </div>
+            </a>
+            <?php endwhile; wp_reset_postdata(); ?>
+        </div>
+        <?php
+        $gt_posts_page_id = get_option('page_for_posts');
+        $gt_blog_url = $gt_posts_page_id ? get_permalink($gt_posts_page_id) : get_post_type_archive_link('post');
+        if ($gt_blog_url) :
+        ?>
+        <div class="blog-footer">
+            <a href="<?php echo esc_url($gt_blog_url); ?>" class="btn-secondary" data-i18n="blog.view_all">View all posts</a>
+        </div>
+        <?php endif; ?>
+    </div>
+</section>
+<?php endif; ?>
+
 <!-- ===== CONTACT FORM (shared) ===== -->
 <div class="sv-page">
 <?php get_template_part('template-parts/contact-form'); ?>

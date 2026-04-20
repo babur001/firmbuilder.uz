@@ -164,6 +164,11 @@ const translations = {
         'contact.direct_desc': 'Our specialists will answer all questions during business hours. For urgent requests — call directly.',
         'contact.general': 'General inquiry',
         'contact.phone_tashkent': 'Phone (Tashkent)',
+        // Blog / News (homepage)
+        'blog.label': 'News',
+        'blog.title': 'Latest News',
+        'blog.description': 'Updates from our projects, market insights, and company news.',
+        'blog.view_all': 'View all posts',
         // Contacts page
         'contacts.hero_badge': 'Get in touch',
         'contacts.hero_title': 'Contacts',
@@ -554,6 +559,11 @@ const translations = {
         'contact.direct_desc': 'Наши специалисты ответят на все вопросы в рабочее время. Для срочных запросов — звоните напрямую.',
         'contact.general': 'Общие вопросы',
         'contact.phone_tashkent': 'Телефон (Ташкент)',
+        // Blog / News (homepage)
+        'blog.label': 'Новости',
+        'blog.title': 'Последние новости',
+        'blog.description': 'Обновления по нашим проектам, аналитика рынка и новости компании.',
+        'blog.view_all': 'Все публикации',
         // Contacts page
         'contacts.hero_badge': 'Свяжитесь с нами',
         'contacts.hero_title': 'Контакты',
@@ -944,6 +954,11 @@ const translations = {
         'contact.direct_desc': 'Mutaxassislarimiz ish vaqtida barcha savollarga javob berishadi. Shoshilinch so\'rovlar uchun — to\'g\'ridan-to\'g\'ri qo\'ng\'iroq qiling.',
         'contact.general': 'Umumiy so\'rovlar',
         'contact.phone_tashkent': 'Telefon (Toshkent)',
+        // Blog / News (homepage)
+        'blog.label': 'Yangiliklar',
+        'blog.title': 'So\'nggi yangiliklar',
+        'blog.description': 'Loyihalarimiz yangilanishlari, bozor tahlili va kompaniya yangiliklari.',
+        'blog.view_all': 'Barcha yangiliklar',
         // Contacts page
         'contacts.hero_badge': 'Biz bilan bog\'laning',
         'contacts.hero_title': 'Kontaktlar',
