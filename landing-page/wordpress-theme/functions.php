@@ -26,6 +26,24 @@ function globaltech_setup() {
 }
 add_action('after_setup_theme', 'globaltech_setup');
 
+// ─── Document Title Cleanup ───────────────────────────────────────────────────
+// Ensures the <title> tag always ends with "Davs Global" (never a dangling "-")
+function globaltech_document_title_parts($parts) {
+    $site_name = get_bloginfo('name');
+    if (empty($site_name)) {
+        $site_name = 'Davs Global';
+    }
+    $parts['site'] = $site_name;
+    unset($parts['tagline']);
+    return $parts;
+}
+add_filter('document_title_parts', 'globaltech_document_title_parts');
+
+function globaltech_document_title_separator() {
+    return '|';
+}
+add_filter('document_title_separator', 'globaltech_document_title_separator');
+
 // ─── Enqueue Scripts & Styles ─────────────────────────────────────────────────
 function globaltech_assets() {
     $version = filemtime(get_template_directory() . '/js/main.js');
