@@ -28,16 +28,41 @@ get_header();
         <h2 class="sv-section-title" data-i18n="equipment.products_title">Equipment catalog</h2>
     </div>
     <div class="sv-cards-grid sv-cards-grid--4col">
+        <?php
+        $gt_concrete_pdf      = get_theme_mod('gt_equipment_concrete_catalog_pdf', DAVS_DEFAULT_CONCRETE_CATALOG_PDF);
+        $gt_asphalt_pdf_uz    = get_theme_mod('gt_equipment_asphalt_catalog_pdf', DAVS_DEFAULT_EQUIPMENT_CATALOG_PDF);
+        $gt_asphalt_pdf_ru_en = get_theme_mod('gt_equipment_asphalt_catalog_pdf_ru_en', DAVS_DEFAULT_EQUIPMENT_CATALOG_PDF_RU_EN);
+        $has_asphalt_catalog  = (bool) ($gt_asphalt_pdf_uz || $gt_asphalt_pdf_ru_en);
+        $concrete_aria        = __('Concrete batching plants catalog (PDF, opens in new tab)', 'globaltech');
+        ?>
+        <?php if ($gt_concrete_pdf) : ?>
+        <a class="sv-card sv-card--link" href="<?php echo esc_url($gt_concrete_pdf); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr($concrete_aria); ?>">
+        <?php else : ?>
         <div class="sv-card">
+        <?php endif; ?>
             <div class="sv-card-icon"><svg viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <div class="sv-card-title" data-i18n="equipment.product1_title">Concrete Batching Plants</div>
             <div class="sv-card-desc" data-i18n="equipment.product1_desc">Stationary and mobile concrete plants of various capacities from leading Chinese manufacturers. Equipment is selected based on project requirements, with reliable configurations and practical support throughout the process.</div>
+        <?php if ($gt_concrete_pdf) : ?>
+        </a>
+        <?php else : ?>
         </div>
+        <?php endif; ?>
+        <?php if ($has_asphalt_catalog) : ?>
+        <div class="sv-card sv-card--equipment-asphalt-catalog"
+            <?php if ($gt_asphalt_pdf_uz) : ?>data-asphalt-catalog-pdf-uz="<?php echo esc_url($gt_asphalt_pdf_uz); ?>"<?php endif; ?>
+            <?php if ($gt_asphalt_pdf_ru_en) : ?>data-asphalt-catalog-pdf-ru-en="<?php echo esc_url($gt_asphalt_pdf_ru_en); ?>"<?php endif; ?>>
+            <div class="sv-card-icon"><svg viewBox="0 0 24 24"><path d="M2 20h20M5 20v-9l3 1.5V9l3 1.5V7l3 1.5V5l3 1.5V4l3 1.5V20" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="sv-card-title" data-i18n="equipment.product2_title">Asphalt Plants</div>
+            <div class="sv-card-desc" data-i18n="equipment.product2_desc">Asphalt plants for road construction and infrastructure projects. Solutions are tailored individually according to required capacity and technical specifications.</div>
+        </div>
+        <?php else : ?>
         <div class="sv-card">
             <div class="sv-card-icon"><svg viewBox="0 0 24 24"><path d="M2 20h20M5 20v-9l3 1.5V9l3 1.5V7l3 1.5V5l3 1.5V4l3 1.5V20" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <div class="sv-card-title" data-i18n="equipment.product2_title">Asphalt Plants</div>
             <div class="sv-card-desc" data-i18n="equipment.product2_desc">Asphalt plants for road construction and infrastructure projects. Solutions are tailored individually according to required capacity and technical specifications.</div>
         </div>
+        <?php endif; ?>
         <div class="sv-card">
             <div class="sv-card-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <div class="sv-card-title" data-i18n="equipment.product3_title">Drilling Equipment</div>

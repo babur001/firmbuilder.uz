@@ -1595,6 +1595,15 @@ button.social-link {
 }
 .sv-card--clickable { cursor: pointer; }
 .sv-card--clickable:hover { border-color: rgba(33,150,243,0.45); }
+a.sv-card.sv-card--link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+a.sv-card.sv-card--link:focus-visible {
+    outline: 2px solid rgba(33, 150, 243, 0.8);
+    outline-offset: 3px;
+}
 
 /* Logistics Service Modal */
 .sv-lmodal {

@@ -1216,6 +1216,51 @@ const translations = {
     }
 };
 
+// ----- Equipment page: asphalt 2nd card — PDF by language (UZ vs EN/RU) -----
+function equipmentAsphaltCatalogPdfUrl(card) {
+    if (!card) return '';
+    if (currentLang === 'uz') return card.dataset.asphaltCatalogPdfUz || '';
+    if (currentLang === 'en' || currentLang === 'ru') return card.dataset.asphaltCatalogPdfRuEn || '';
+    return '';
+}
+
+function initEquipmentAsphaltCatalog() {
+    const card = document.querySelector('.sv-card--equipment-asphalt-catalog');
+    if (!card || card.dataset.asphaltCatalogBound === '1') return;
+    if (!card.dataset.asphaltCatalogPdfUz && !card.dataset.asphaltCatalogPdfRuEn) return;
+    card.dataset.asphaltCatalogBound = '1';
+    card.addEventListener('click', function() {
+        const url = equipmentAsphaltCatalogPdfUrl(card);
+        if (!url) return;
+        window.open(url, '_blank', 'noopener,noreferrer');
+    });
+    card.addEventListener('keydown', function(e) {
+        const url = equipmentAsphaltCatalogPdfUrl(card);
+        if (!url) return;
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            window.open(url, '_blank', 'noopener,noreferrer');
+        }
+    });
+}
+
+function updateEquipmentAsphaltCatalogUi() {
+    const card = document.querySelector('.sv-card--equipment-asphalt-catalog');
+    if (!card) return;
+    const url = equipmentAsphaltCatalogPdfUrl(card);
+    const clickable = !!url;
+    card.classList.toggle('sv-card--link', clickable);
+    card.style.cursor = clickable ? 'pointer' : '';
+    card.tabIndex = clickable ? 0 : -1;
+    if (clickable) {
+        card.setAttribute('role', 'link');
+        card.setAttribute('aria-label', currentLang === 'uz' ? 'Asfalt zavodlar — katalog (PDF)' : (currentLang === 'ru' ? 'Асфальтные заводы — каталог (PDF)' : 'Asphalt plants catalog (PDF)'));
+    } else {
+        card.removeAttribute('role');
+        card.removeAttribute('aria-label');
+    }
+}
+
 // ===== LANGUAGE SWITCHER =====
 let currentLang = localStorage.getItem('lang') || 'ru';
 
@@ -1234,9 +1279,11 @@ function setLanguage(lang) {
     });
     // Reload blog posts in new language sample
     if (!WP_CONFIG.enabled) renderSamplePosts(lang);
+    updateEquipmentAsphaltCatalogUi();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    initEquipmentAsphaltCatalog();
     setLanguage(currentLang);
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', () => setLanguage(btn.dataset.lang));

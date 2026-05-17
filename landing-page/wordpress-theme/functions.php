@@ -4,6 +4,27 @@
  * functions.php
  */
 
+if (!defined('DAVS_DEFAULT_EQUIPMENT_CATALOG_PDF')) {
+    define(
+        'DAVS_DEFAULT_EQUIPMENT_CATALOG_PDF',
+        'https://firmbuilder.asia/wp-content/uploads/2026/05/DavsGlobal-uz.pdf'
+    );
+}
+
+if (!defined('DAVS_DEFAULT_EQUIPMENT_CATALOG_PDF_RU_EN')) {
+    define(
+        'DAVS_DEFAULT_EQUIPMENT_CATALOG_PDF_RU_EN',
+        'https://darkseagreen-hawk-488270.hostingersite.com/wp-content/uploads/2026/05/2nd-cardDavsGlobal-rus.pdf'
+    );
+}
+
+if (!defined('DAVS_DEFAULT_CONCRETE_CATALOG_PDF')) {
+    define(
+        'DAVS_DEFAULT_CONCRETE_CATALOG_PDF',
+        'https://darkseagreen-hawk-488270.hostingersite.com/wp-content/uploads/2026/05/DavsGlobal.pdf'
+    );
+}
+
 // ─── Theme Setup ──────────────────────────────────────────────────────────────
 function globaltech_setup() {
     add_theme_support('title-tag');
@@ -307,6 +328,46 @@ function globaltech_customize_register($wp_customize) {
         'description' => __('Shown as a call button on the floating side panel', 'globaltech'),
         'section'     => 'globaltech_social',
         'type'        => 'tel',
+    ]);
+
+    // ── Equipment page (catalog PDFs) ──
+    $wp_customize->add_section('globaltech_equipment', [
+        'title'       => __('Equipment page', 'globaltech'),
+        'description' => __('Link catalog cards to PDFs from your Media Library.', 'globaltech'),
+        'priority'    => 38,
+    ]);
+
+    $wp_customize->add_setting('gt_equipment_concrete_catalog_pdf', [
+        'default'           => DAVS_DEFAULT_CONCRETE_CATALOG_PDF,
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control('gt_equipment_concrete_catalog_pdf', [
+        'label'       => __('Concrete plants catalog (PDF URL)', 'globaltech'),
+        'description' => __('First card (Beton zavodlar). Media → Library → Copy URL. Opens in a new tab.', 'globaltech'),
+        'section'     => 'globaltech_equipment',
+        'type'        => 'url',
+    ]);
+
+    $wp_customize->add_setting('gt_equipment_asphalt_catalog_pdf', [
+        'default'           => DAVS_DEFAULT_EQUIPMENT_CATALOG_PDF,
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control('gt_equipment_asphalt_catalog_pdf', [
+        'label'       => __('Asphalt plants — Uzbek catalog PDF (URL)', 'globaltech'),
+        'description' => __('Shown when language is UZ (2nd card). Media → Library → Copy URL.', 'globaltech'),
+        'section'     => 'globaltech_equipment',
+        'type'        => 'url',
+    ]);
+
+    $wp_customize->add_setting('gt_equipment_asphalt_catalog_pdf_ru_en', [
+        'default'           => DAVS_DEFAULT_EQUIPMENT_CATALOG_PDF_RU_EN,
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control('gt_equipment_asphalt_catalog_pdf_ru_en', [
+        'label'       => __('Asphalt plants — Russian / English catalog PDF (URL)', 'globaltech'),
+        'description' => __('Same file for EN and RU (2nd card). Media → Library → Copy URL.', 'globaltech'),
+        'section'     => 'globaltech_equipment',
+        'type'        => 'url',
     ]);
 
     // ── SEO ──
