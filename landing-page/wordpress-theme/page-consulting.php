@@ -76,7 +76,6 @@ get_header();
         <div class="sv-visa-card">
             <div class="sv-visa-card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
             <div class="sv-visa-card-title" data-i18n="consulting.visa2_title">Work Visa (Z) via company</div>
-            <div class="sv-visa-card-price">$350 <span data-i18n="consulting.visa_per">/ person</span></div>
             <div class="sv-visa-card-features">
                 <div class="sv-visa-card-feature"><div class="sv-visa-card-feature-check"></div><span data-i18n="consulting.visa2_f1">Employment through a Chinese company</span></div>
                 <div class="sv-visa-card-feature"><div class="sv-visa-card-feature-check"></div><span data-i18n="consulting.visa2_f2">Work Permit and Residence Permit processing</span></div>
@@ -88,7 +87,6 @@ get_header();
         <div class="sv-visa-card">
             <div class="sv-visa-card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
             <div class="sv-visa-card-title" data-i18n="consulting.visa3_title">Hong Kong visa via company</div>
-            <div class="sv-visa-card-price">$200 <span data-i18n="consulting.visa_per">/ person</span></div>
             <div class="sv-visa-card-features">
                 <div class="sv-visa-card-feature"><div class="sv-visa-card-feature-check"></div><span data-i18n="consulting.visa3_f1">Visa processing through a Hong Kong company</span></div>
                 <div class="sv-visa-card-feature"><div class="sv-visa-card-feature-check"></div><span data-i18n="consulting.visa3_f2">Business and investment visa options</span></div>

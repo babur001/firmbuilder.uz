@@ -9,7 +9,7 @@ get_header();
 <div class="sv-page">
 
 <!-- Hero -->
-<div class="sv-hero" style="min-height:480px">
+<div class="sv-hero sv-hero--with-bg" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero-contacts.jpg'); ?>');">
     <div class="sv-hero-badge">
         <div class="sv-hero-badge-dot"></div>
         <span class="sv-hero-badge-text" data-i18n="contacts.hero_badge">Get in touch</span>

@@ -277,7 +277,7 @@ function globaltech_customize_register($wp_customize) {
         'type'    => 'url',
     ]);
 
-    $wp_customize->add_setting('gt_telegram', ['default' => 'https://t.me/davsglobal', 'sanitize_callback' => 'esc_url_raw']);
+    $wp_customize->add_setting('gt_telegram', ['default' => 'https://t.me/Shanghaicompany', 'sanitize_callback' => 'esc_url_raw']);
     $wp_customize->add_control('gt_telegram', [
         'label'       => __('Telegram URL', 'globaltech'),
         'description' => __('e.g. https://t.me/yourname', 'globaltech'),
@@ -285,7 +285,7 @@ function globaltech_customize_register($wp_customize) {
         'type'        => 'url',
     ]);
 
-    $wp_customize->add_setting('gt_instagram', ['default' => 'https://instagram.com/davsglobal', 'sanitize_callback' => 'esc_url_raw']);
+    $wp_customize->add_setting('gt_instagram', ['default' => 'https://www.instagram.com/davs_china/', 'sanitize_callback' => 'esc_url_raw']);
     $wp_customize->add_control('gt_instagram', [
         'label'       => __('Instagram URL', 'globaltech'),
         'description' => __('e.g. https://instagram.com/yourname', 'globaltech'),
@@ -293,15 +293,15 @@ function globaltech_customize_register($wp_customize) {
         'type'        => 'url',
     ]);
 
-    $wp_customize->add_setting('gt_whatsapp', ['default' => '998900000000', 'sanitize_callback' => 'sanitize_text_field']);
-    $wp_customize->add_control('gt_whatsapp', [
-        'label'       => __('WhatsApp number', 'globaltech'),
-        'description' => __('Include country code without +, e.g. 9989xxxxxxx', 'globaltech'),
+    $wp_customize->add_setting('gt_wechat_qr', ['default' => '', 'sanitize_callback' => 'esc_url_raw']);
+    $wp_customize->add_control('gt_wechat_qr', [
+        'label'       => __('WeChat QR image URL', 'globaltech'),
+        'description' => __('Optional. Leave empty to use the default QR bundled with the theme, or paste a link from your Media Library.', 'globaltech'),
         'section'     => 'globaltech_social',
-        'type'        => 'text',
+        'type'        => 'url',
     ]);
 
-    $wp_customize->add_setting('gt_phone_primary', ['default' => '+998 90 000 00 00', 'sanitize_callback' => 'sanitize_text_field']);
+    $wp_customize->add_setting('gt_phone_primary', ['default' => '+998930777700', 'sanitize_callback' => 'sanitize_text_field']);
     $wp_customize->add_control('gt_phone_primary', [
         'label'       => __('Primary phone (floating panel)', 'globaltech'),
         'description' => __('Shown as a call button on the floating side panel', 'globaltech'),

@@ -332,13 +332,13 @@ const translations = {
         'logistics.route1_desc': 'Guangzhou, Shenzhen, Yiwu, Shanghai, and other industrial regions. Cargo consolidation, warehousing, and export preparation.',
         'logistics.route2_country': 'Russia',
         'logistics.route2_sub': 'Road / Rail',
-        'logistics.route2_desc': 'Delivery across all regions of Russia. Stable logistics routes via truck and rail. Transit time: 20–25 days.',
+        'logistics.route2_desc': 'Delivery across all regions of Russia. Stable logistics routes via truck and rail.',
         'logistics.route3_country': 'Central Asia',
         'logistics.route3_sub': 'Key market',
-        'logistics.route3_desc': 'Uzbekistan, Kazakhstan, Kyrgyzstan — key markets. Regular shipments via road and rail transport. Transit time: 7–15 days.',
+        'logistics.route3_desc': 'Uzbekistan, Kazakhstan, Kyrgyzstan — key markets. Regular shipments via road and rail transport.',
         'logistics.route4_country': 'USA',
         'logistics.route4_sub': 'Sea freight',
-        'logistics.route4_desc': 'Container shipping (FCL / LCL). Port-to-port and door-to-door solutions available. Transit time: 25–40 days.',
+        'logistics.route4_desc': 'Container shipping (FCL / LCL). Port-to-port and door-to-door solutions available.',
         'logistics.services_label': 'OUR SERVICES',
         'logistics.services_title': 'Integrated logistics system',
         'logistics.services_desc': 'From China to the final destination — a single, fully managed logistics chain without intermediaries.',
@@ -727,13 +727,13 @@ const translations = {
         'logistics.route1_desc': 'Гуанчжоу, Шэньчжэнь, Иу, Шанхай и другие промышленные регионы. Консолидация, складирование и подготовка к экспорту.',
         'logistics.route2_country': 'Россия',
         'logistics.route2_sub': 'Авто / ж/д',
-        'logistics.route2_desc': 'Доставка по всей территории России. Стабильные маршруты через автотранспорт и железную дорогу. Срок: 20–25 дней.',
+        'logistics.route2_desc': 'Доставка по всей территории России. Стабильные маршруты через автотранспорт и железную дорогу.',
         'logistics.route3_country': 'Центральная Азия',
         'logistics.route3_sub': 'Ключевое направление',
-        'logistics.route3_desc': 'Узбекистан, Казахстан, Кыргызстан — ключевые направления. Регулярные отправки авто и ж/д транспортом. Срок: 7–15 дней.',
+        'logistics.route3_desc': 'Узбекистан, Казахстан, Кыргызстан — ключевые направления. Регулярные отправки авто и ж/д транспортом.',
         'logistics.route4_country': 'США',
         'logistics.route4_sub': 'Морские перевозки',
-        'logistics.route4_desc': 'Контейнерные перевозки (FCL / LCL). Решения порт-порт и door-to-door. Срок: 25–40 дней.',
+        'logistics.route4_desc': 'Контейнерные перевозки (FCL / LCL). Решения порт-порт и door-to-door.',
         'logistics.services_label': 'НАШИ УСЛУГИ',
         'logistics.services_title': 'Единая логистическая система',
         'logistics.services_desc': 'Доставка из Китая до конечного пункта — единая система управления без посредников.',
@@ -1111,13 +1111,13 @@ const translations = {
         'logistics.route1_desc': 'Guanchjou, Shenzhen, Yiwu, Shanxay va boshqa sanoat hududlarida yuklarni qabul qilamiz. Konsolidatsiya, omborlash va eksportga tayyorlash xizmatlari mavjud.',
         'logistics.route2_country': 'Rossiya',
         'logistics.route2_sub': 'Quruqlik / Temir yo\'l',
-        'logistics.route2_desc': 'Rossiyaning barcha hududlariga barqaror logistika yo\'nalishlari orqali yetkazib berish. Avtotransport va temir yo\'l orqali door-to-door. Transit: 20–25 kun.',
+        'logistics.route2_desc': 'Rossiyaning barcha hududlariga barqaror logistika yo\'nalishlari orqali yetkazib berish. Avtotransport va temir yo\'l orqali door-to-door.',
         'logistics.route3_country': 'Markaziy Osiyo',
         'logistics.route3_sub': 'Asosiy yo\'nalish',
-        'logistics.route3_desc': 'O\'zbekiston, Qozog\'iston va Qirg\'izistonga tezkor va optimal logistika yechimlari. Quruqlik transporti va temir yo\'l orqali muntazam jo\'natmalar. Transit: 7–15 kun.',
+        'logistics.route3_desc': 'O\'zbekiston, Qozog\'iston va Qirg\'izistonga tezkor va optimal logistika yechimlari. Quruqlik transporti va temir yo\'l orqali muntazam jo\'natmalar.',
         'logistics.route4_country': 'AQSh',
         'logistics.route4_sub': 'Dengiz logistikasi',
-        'logistics.route4_desc': 'AQShga konteyner yuklari (FCL / LCL) orqali dengiz transporti. Portdan portgacha yoki door-to-door yechimlar mavjud. Transit: 25–40 kun.',
+        'logistics.route4_desc': 'AQShga konteyner yuklari (FCL / LCL) orqali dengiz transporti. Portdan portgacha yoki door-to-door yechimlar mavjud.',
         'logistics.services_label': 'BIZNING XIZMATLAR',
         'logistics.services_title': 'Yagona logistika tizimi',
         'logistics.services_desc': 'Xitoydan yakuniy manzilgacha — yagona boshqaruv ostida, vositachilarsiz logistika zanjiri.',
@@ -1499,6 +1499,47 @@ function initGalleryModals() {
 
 // ===== LOGISTICS SERVICE MODAL =====
 const logisticsDetails = {
+    card1: {
+        en: {
+            hero: 'Road freight is a fast and flexible solution for delivering cargo from China to Central Asia and Russia. We build optimized routes and maintain full control from pickup to final delivery.',
+            aboutTitle: 'About the service',
+            about: 'We organize door-to-door road delivery for consolidated (LCL) and full truckload shipments. Suitable for urgent cargo and routes where speed and flexibility are the priority.',
+            howTitle: 'How it works',
+            steps: ['Cargo pickup from supplier', 'Consolidation (if needed)', 'Route planning & dispatch', 'Border crossing & customs support', 'Final delivery to your warehouse/site'],
+            stepsNote: '',
+            advTitle: 'Advantages',
+            advantages: ['Flexible schedules and routes', 'Fast delivery to Central Asia', 'Door-to-door options', 'Shipment tracking & control', 'Suitable for LCL and FTL cargo'],
+            suitTitle: 'Suitable for',
+            suitable: ['Urgent shipments', 'Small & medium batches', 'E-commerce and consumer goods', 'Equipment and spare parts'],
+            ctaDesc: 'Send your request — we will calculate the cost and delivery timeline.'
+        },
+        ru: {
+            hero: 'Автоперевозки — быстрый и гибкий способ доставки грузов из Китая в Центральную Азию и Россию. Мы выстраиваем оптимальные маршруты и полностью контролируем процесс от забора до финальной доставки.',
+            aboutTitle: 'О сервисе',
+            about: 'Организуем доставку “под ключ” автотранспортом для сборных и полных партий. Подходит для срочных грузов и направлений, где важны скорость и гибкость.',
+            howTitle: 'Как это работает',
+            steps: ['Забор груза у поставщика', 'Консолидация (при необходимости)', 'Планирование маршрута и отправка', 'Пересечение границы и поддержка на таможне', 'Доставка до склада/объекта получателя'],
+            stepsNote: '',
+            advTitle: 'Преимущества',
+            advantages: ['Гибкий график и маршруты', 'Быстрая доставка в Центральную Азию', 'Возможность door-to-door', 'Контроль и отслеживание', 'Подходит для сборных и полных партий'],
+            suitTitle: 'Для каких грузов',
+            suitable: ['Срочные поставки', 'Небольшие и средние партии', 'Потребительские товары', 'Оборудование и запчасти'],
+            ctaDesc: 'Оставьте заявку — мы рассчитаем стоимость и сроки доставки.'
+        },
+        uz: {
+            hero: 'Quruqlik (avto) orqali yetkazish — Xitoydan Markaziy Osiyo va Rossiyaga yuklarni tezkor va moslashuvchan tarzda yetkazib berishning eng qulay yo‘lidir. Biz yukni olib ketishdan yakuniy manzilgacha bo‘lgan jarayonni to‘liq nazorat qilamiz.',
+            aboutTitle: 'Xizmat haqida',
+            about: 'Sizning yukingiz hajmiga qarab yig‘ma (LCL) yoki to‘liq yuk (FTL) formatida quruqlik orqali door-to-door yetkazib berishni tashkil qilamiz. Tezlik va moslashuvchanlik muhim bo‘lgan yo‘nalishlarda ayni yechim.',
+            howTitle: 'Qanday ishlaydi',
+            steps: ['Yukni yetkazib beruvchidan qabul qilish', 'Konsolidatsiya (zarur bo‘lsa)', 'Marshrutni rejalashtirish va jo‘natish', 'Chegara va bojxona jarayonlarida ko‘mak', 'Yakuniy manzilgacha yetkazib berish'],
+            stepsNote: '',
+            advTitle: 'Afzalliklar',
+            advantages: ['Moslashuvchan marshrut va jadval', 'Markaziy Osiyoga tezkor yetkazish', 'Door-to-door yechim', 'Kuzatuv va to‘liq nazorat', 'Yig‘ma va to‘liq yuklar uchun mos'],
+            suitTitle: 'Qaysi yuklar uchun mos',
+            suitable: ['Shoshilinch jo‘natmalar', 'Kichik va o‘rta partiyalar', 'Iste’mol tovarlari', 'Uskuna va ehtiyot qismlar'],
+            ctaDesc: 'So‘rov yuboring — narx va yetkazish muddatini hisoblab beramiz.'
+        }
+    },
     card2: {
         en: {
             hero: 'Rail transport is the most efficient and cost-effective solution for delivering large-volume cargo from China to Central Asia and Russia. We ensure stable transit times and full control over the logistics process.',
@@ -2298,3 +2339,29 @@ function showWPConfigNotice() {
     const notice = document.getElementById('wpConfigNotice');
     if (notice) notice.classList.add('show');
 }
+
+// ===== WeChat QR: hover popover (float); footer always opens modal; float modal on touch only =====
+(function() {
+    const openBtns = document.querySelectorAll('[data-gt-wechat-open]');
+    const dlg = document.getElementById('gt-wechat-dialog');
+    if (!openBtns.length || !dlg) return;
+
+    const closeBtn = dlg.querySelector('.gt-wechat-dialog__close');
+    const coarsePointer = window.matchMedia('(hover: none)');
+
+    openBtns.forEach(function(openBtn) {
+        const alwaysModal = openBtn.hasAttribute('data-gt-wechat-always-modal');
+        openBtn.addEventListener('click', function() {
+            if (typeof dlg.showModal !== 'function') return;
+            if (alwaysModal || coarsePointer.matches) dlg.showModal();
+        });
+    });
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() { dlg.close(); });
+    }
+
+    dlg.addEventListener('click', function(e) {
+        if (e.target === dlg) dlg.close();
+    });
+})();

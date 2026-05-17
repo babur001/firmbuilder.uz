@@ -1,3 +1,12 @@
+<?php
+$gt_telegram  = get_theme_mod('gt_telegram', 'https://t.me/Shanghaicompany');
+$gt_instagram = get_theme_mod('gt_instagram', 'https://www.instagram.com/davs_china/');
+$gt_wechat_qr = get_theme_mod('gt_wechat_qr');
+if ($gt_wechat_qr === '' || $gt_wechat_qr === null) {
+    $gt_wechat_qr = get_template_directory_uri() . '/assets/wechat-qr.png';
+}
+$gt_phone = get_theme_mod('gt_phone_primary', '+998930777700');
+?>
 <footer class="footer">
     <div class="container">
         <div class="footer-grid">
@@ -50,9 +59,14 @@
             <p data-i18n="footer.copyright">© <?php echo date('Y'); ?> Davs Global. All rights reserved.</p>
             <div class="footer-socials">
                 <?php if (get_theme_mod('gt_linkedin')) : ?>
-                <a href="<?php echo esc_url(get_theme_mod('gt_linkedin')); ?>" class="social-link" aria-label="LinkedIn" target="_blank">
+                <a href="<?php echo esc_url(get_theme_mod('gt_linkedin')); ?>" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                 </a>
+                <?php endif; ?>
+                <?php if ($gt_wechat_qr) : ?>
+                <button type="button" class="social-link social-link--btn" data-gt-wechat-open data-gt-wechat-always-modal aria-label="WeChat" aria-controls="gt-wechat-dialog" aria-haspopup="dialog">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-5.507 2.57-7.043 1.524-.983 3.425-1.457 5.335-1.457C21.109 5.188 17.218 2.188 12.418 2.188h-3.727zm-.872 5.563c-.698 0-1.263-.565-1.263-1.263s.565-1.263 1.263-1.263 1.263.565 1.263 1.263-.565 1.263-1.263 1.263zm5.813 0c-.698 0-1.263-.565-1.263-1.263s.565-1.263 1.263-1.263 1.263.565 1.263 1.263-.565 1.263-1.263 1.263zm5.34 2.867c-3.254 0-5.905 2.214-5.905 4.94 0 1.748 1.135 3.285 2.863 4.162a.59.59 0 0 1 .213.665l-.39 1.48a.285.285 0 0 0 .048.213c.08.14.238.178.377.098l1.903-1.114a.864.864 0 0 1 .717-.098 9.84 9.84 0 0 0 3.077.486c3.254 0 5.905-2.214 5.905-4.94 0-2.726-2.651-4.952-5.905-4.952z"/></svg>
+                </button>
                 <?php endif; ?>
             </div>
         </div>
@@ -60,11 +74,7 @@
 </footer>
 
 <?php
-$gt_telegram  = get_theme_mod('gt_telegram', 'https://t.me/davsglobal');
-$gt_instagram = get_theme_mod('gt_instagram', 'https://instagram.com/davsglobal');
-$gt_whatsapp  = get_theme_mod('gt_whatsapp', '998900000000');
-$gt_phone     = get_theme_mod('gt_phone_primary', '+998 90 000 00 00');
-if ($gt_telegram || $gt_instagram || $gt_whatsapp || $gt_phone) :
+if ($gt_telegram || $gt_instagram || $gt_wechat_qr || $gt_phone) :
 ?>
 <aside class="gt-float-panel" aria-label="Quick contact">
     <?php if ($gt_telegram) : ?>
@@ -79,12 +89,16 @@ if ($gt_telegram || $gt_instagram || $gt_whatsapp || $gt_phone) :
     </a>
     <?php endif; ?>
 
-    <?php if ($gt_whatsapp) :
-        $wa_num = preg_replace('/\D+/', '', $gt_whatsapp);
-    ?>
-    <a class="gt-float-btn" href="https://wa.me/<?php echo esc_attr($wa_num); ?>" target="_blank" rel="noopener" data-label="WhatsApp" aria-label="WhatsApp">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.885 3.7"/></svg>
-    </a>
+    <?php if ($gt_wechat_qr) : ?>
+    <div class="gt-float-wechat-wrap">
+        <button type="button" class="gt-float-btn gt-float-btn--wechat" data-gt-wechat-open aria-label="WeChat" aria-haspopup="dialog" aria-controls="gt-wechat-dialog">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-5.507 2.57-7.043 1.524-.983 3.425-1.457 5.335-1.457C21.109 5.188 17.218 2.188 12.418 2.188h-3.727zm-.872 5.563c-.698 0-1.263-.565-1.263-1.263s.565-1.263 1.263-1.263 1.263.565 1.263 1.263-.565 1.263-1.263 1.263zm5.813 0c-.698 0-1.263-.565-1.263-1.263s.565-1.263 1.263-1.263 1.263.565 1.263 1.263-.565 1.263-1.263 1.263zm5.34 2.867c-3.254 0-5.905 2.214-5.905 4.94 0 1.748 1.135 3.285 2.863 4.162a.59.59 0 0 1 .213.665l-.39 1.48a.285.285 0 0 0 .048.213c.08.14.238.178.377.098l1.903-1.114a.864.864 0 0 1 .717-.098 9.84 9.84 0 0 0 3.077.486c3.254 0 5.905-2.214 5.905-4.94 0-2.726-2.651-4.952-5.905-4.952z"/></svg>
+        </button>
+        <div class="gt-wechat-qr-hover" aria-hidden="true">
+            <img src="<?php echo esc_url($gt_wechat_qr); ?>" width="220" height="220" alt="" loading="lazy" decoding="async">
+            <p class="gt-wechat-qr-hover__hint"><?php echo esc_html(__('Scan to add WeChat', 'globaltech')); ?></p>
+        </div>
+    </div>
     <?php endif; ?>
 
     <?php if ($gt_phone) : ?>
@@ -93,6 +107,16 @@ if ($gt_telegram || $gt_instagram || $gt_whatsapp || $gt_phone) :
     </a>
     <?php endif; ?>
 </aside>
+<?php endif; ?>
+<?php if ($gt_wechat_qr) : ?>
+<dialog class="gt-wechat-dialog" id="gt-wechat-dialog" aria-labelledby="gt-wechat-dialog-title">
+    <div class="gt-wechat-dialog__inner">
+        <button type="button" class="gt-wechat-dialog__close" aria-label="<?php echo esc_attr(__('Close', 'globaltech')); ?>">&times;</button>
+        <h2 id="gt-wechat-dialog-title" class="gt-wechat-dialog__title"><?php echo esc_html(__('WeChat', 'globaltech')); ?></h2>
+        <img class="gt-wechat-dialog__qr" src="<?php echo esc_url($gt_wechat_qr); ?>" width="260" height="260" alt="<?php echo esc_attr(__('WeChat QR code', 'globaltech')); ?>" loading="lazy" decoding="async">
+        <p class="gt-wechat-dialog__hint"><?php echo esc_html(__('Scan the QR code to add us on WeChat.', 'globaltech')); ?></p>
+    </div>
+</dialog>
 <?php endif; ?>
 
 <?php wp_footer(); ?>

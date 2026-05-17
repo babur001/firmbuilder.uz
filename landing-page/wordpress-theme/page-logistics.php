@@ -42,19 +42,19 @@ get_header();
             <div class="sv-route-number">02 — DESTINATION</div>
             <div class="sv-route-country" data-i18n="logistics.route2_country">Russia</div>
             <div class="sv-route-subtitle" data-i18n="logistics.route2_sub">Road / Rail</div>
-            <div class="sv-route-desc" data-i18n="logistics.route2_desc">Delivery across all regions of Russia. Stable logistics routes via truck and rail. Transit time: 20–25 days.</div>
+            <div class="sv-route-desc" data-i18n="logistics.route2_desc">Delivery across all regions of Russia. Stable logistics routes via truck and rail.</div>
         </div>
         <div class="sv-route-card">
             <div class="sv-route-number">03 — DESTINATION</div>
             <div class="sv-route-country" data-i18n="logistics.route3_country">Central Asia</div>
             <div class="sv-route-subtitle" data-i18n="logistics.route3_sub">Key market</div>
-            <div class="sv-route-desc" data-i18n="logistics.route3_desc">Uzbekistan, Kazakhstan, Kyrgyzstan — key markets. Regular shipments via road and rail transport. Transit time: 7–15 days.</div>
+            <div class="sv-route-desc" data-i18n="logistics.route3_desc">Uzbekistan, Kazakhstan, Kyrgyzstan — key markets. Regular shipments via road and rail transport.</div>
         </div>
         <div class="sv-route-card">
             <div class="sv-route-number">04 — DESTINATION</div>
             <div class="sv-route-country" data-i18n="logistics.route4_country">USA</div>
             <div class="sv-route-subtitle" data-i18n="logistics.route4_sub">Sea freight</div>
-            <div class="sv-route-desc" data-i18n="logistics.route4_desc">Container shipping (FCL / LCL). Port-to-port and door-to-door solutions available. Transit time: 25–40 days.</div>
+            <div class="sv-route-desc" data-i18n="logistics.route4_desc">Container shipping (FCL / LCL). Port-to-port and door-to-door solutions available.</div>
         </div>
     </div>
 </div>

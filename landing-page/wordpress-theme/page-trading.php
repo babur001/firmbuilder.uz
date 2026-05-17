@@ -9,7 +9,7 @@ get_header();
 <div class="sv-page">
 
 <!-- Hero -->
-<div class="sv-hero">
+<div class="sv-hero sv-hero--with-bg" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero-trading.jpg'); ?>');">
     <div class="sv-hero-badge">
         <div class="sv-hero-badge-dot"></div>
         <span class="sv-hero-badge-text" data-i18n="trading.hero_badge">Trading & Procurement</span>

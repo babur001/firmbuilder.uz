@@ -932,6 +932,13 @@ a.service-card *, a.service-card:visited *, a.service-card:hover *, a.service-ca
     transition: all 0.3s ease;
 }
 .social-link:hover { background: var(--electric-blue); border-color: var(--electric-blue); color: var(--white); }
+button.social-link {
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+    appearance: none;
+    -webkit-appearance: none;
+}
 
 /* ===== REVEAL ANIMATION ===== */
 .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth); }
@@ -1430,7 +1437,8 @@ a.service-card *, a.service-card:visited *, a.service-card:hover *, a.service-ca
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(14,14,16,0.92) 0%, rgba(14,14,16,0.78) 50%, rgba(14,14,16,0.55) 100%);
+    /* Align with homepage hero-overlay: dark base + navy tint for readable type */
+    background: linear-gradient(135deg, rgba(14, 14, 16, 0.9) 0%, rgba(15, 61, 94, 0.4) 100%);
     pointer-events: none;
     z-index: 0;
 }
@@ -1455,7 +1463,7 @@ a.service-card *, a.service-card:visited *, a.service-card:hover *, a.service-ca
     color: var(--sv-blue);
 }
 .sv-hero-title {
-    font-size: 64px;
+    font-size: 56px;
     font-weight: 800;
     line-height: 1.08;
     letter-spacing: -1px;
@@ -1464,7 +1472,7 @@ a.service-card *, a.service-card:visited *, a.service-card:hover *, a.service-ca
 }
 .sv-hero-title .blue { color: var(--sv-blue); }
 .sv-hero-desc {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 300;
     color: var(--sv-muted);
     line-height: 1.6;
@@ -2184,7 +2192,8 @@ a.service-card *, a.service-card:visited *, a.service-card:hover *, a.service-ca
         padding-left: 40px;
         padding-right: 40px;
     }
-    .sv-hero-title { font-size: 48px; }
+    .sv-hero-title { font-size: 44px; }
+    .sv-hero-desc { font-size: 17px; }
     .sv-section-title { font-size: 36px; }
     .sv-cta-title { font-size: 36px; }
     .sv-cards-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2198,7 +2207,8 @@ a.service-card *, a.service-card:visited *, a.service-card:hover *, a.service-ca
         padding: 80px 24px;
         min-height: 400px;
     }
-    .sv-hero-title { font-size: 36px; }
+    .sv-hero-title { font-size: 32px; }
+    .sv-hero-desc { font-size: 16px; }
     .sv-section,
     .sv-cta-section,
     .sv-footer {
@@ -2382,7 +2392,7 @@ textarea.sv-form-input {
     .sv-form-row { grid-template-columns: 1fr; }
 }
 
-/* ===== Floating Side Panel (Telegram/Instagram/WhatsApp/Phone) ===== */
+/* ===== Floating Side Panel (Telegram/Instagram/WeChat/Phone) ===== */
 .gt-float-panel {
     position: fixed;
     right: 20px;
@@ -2420,6 +2430,14 @@ textarea.sv-form-input {
     transform: translateX(-2px);
 }
 .gt-float-btn svg { display: block; width: 26px; height: 26px; }
+button.gt-float-btn {
+    font: inherit;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    appearance: none;
+    -webkit-appearance: none;
+}
 .gt-float-btn::after {
     content: attr(data-label);
     position: absolute;
@@ -2463,6 +2481,126 @@ textarea.sv-form-input {
 .gt-float-btn:focus-visible::before {
     opacity: 1;
     transform: translateY(-50%) rotate(45deg) translateX(0);
+}
+
+/* WeChat: QR on hover (pointer devices); tooltip disabled — QR panel replaces label */
+.gt-float-btn--wechat::after,
+.gt-float-btn--wechat::before {
+    display: none;
+}
+.gt-float-wechat-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.gt-wechat-qr-hover {
+    position: absolute;
+    right: calc(100% + 12px);
+    top: 50%;
+    z-index: 950;
+    width: max-content;
+    max-width: min(240px, calc(100vw - 100px));
+    padding: 14px;
+    background: #141416;
+    border: 1px solid rgba(33, 150, 243, 0.35);
+    border-radius: 14px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-50%) translateX(8px);
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+}
+.gt-wechat-qr-hover img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+.gt-wechat-qr-hover__hint {
+    margin: 10px 0 0;
+    font-size: 12px;
+    line-height: 1.35;
+    color: rgba(255, 255, 255, 0.72);
+    text-align: center;
+}
+@media (hover: hover) and (pointer: fine) {
+    .gt-float-wechat-wrap:hover .gt-wechat-qr-hover,
+    .gt-float-wechat-wrap:focus-within .gt-wechat-qr-hover {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(-50%) translateX(0);
+    }
+}
+@media (hover: none) {
+    .gt-wechat-qr-hover {
+        display: none !important;
+    }
+}
+
+.gt-wechat-dialog {
+    max-width: calc(100vw - 32px);
+    padding: 0;
+    border: 1px solid rgba(33, 150, 243, 0.35);
+    border-radius: 16px;
+    background: #141416;
+    color: #fff;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+.gt-wechat-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+.gt-wechat-dialog__inner {
+    position: relative;
+    padding: 28px 24px 24px;
+    text-align: center;
+    max-width: 320px;
+}
+.gt-wechat-dialog__title {
+    margin: 0 0 16px;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+.gt-wechat-dialog__qr {
+    display: block;
+    width: 260px;
+    height: auto;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+.gt-wechat-dialog__hint {
+    margin: 16px 0 0;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.75);
+}
+.gt-wechat-dialog__close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+.gt-wechat-dialog__close:hover,
+.gt-wechat-dialog__close:focus-visible {
+    background: rgba(33, 150, 243, 0.35);
+    outline: none;
 }
 
 @media (max-width: 640px) {
